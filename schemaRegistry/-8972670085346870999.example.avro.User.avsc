@@ -1,0 +1,18 @@
+{
+  "type" : "record",
+  "name" : "User",
+  "namespace" : "example.avro",
+  "fields" : [ {
+    "name" : "avro_fingerprint",
+    "type" : [ "long", "null" ]
+  }, {
+    "name" : "name",
+    "type" : "string"
+  }, {
+    "name" : "favorite_number",
+    "type" : [ "int", "null" ]
+  }, {
+    "name" : "favorite_color",
+    "type" : [ "string", "null" ]
+  } ]
+}
