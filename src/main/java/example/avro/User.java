@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class User extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8972670085346870999L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"example.avro\",\"fields\":[{\"name\":\"avro_fingerprint\",\"type\":[\"long\",\"null\"]},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favorite_number\",\"type\":[\"int\",\"null\"]},{\"name\":\"favorite_color\",\"type\":[\"string\",\"null\"]}]}");
+  private static final long serialVersionUID = 2933484610517410655L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"example.avro\",\"fields\":[{\"name\":\"avro_fingerprint\",\"type\":\"long\"},{\"name\":\"index_ipid\",\"type\":\"string\"},{\"name\":\"last_update_timestamp\",\"type\":\"long\",\"logical-type\":\"time-micros\"},{\"name\":\"last_update_loginid\",\"type\":\"string\"},{\"name\":\"partner_ipid\",\"type\":\"string\"},{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"favorite_number\",\"type\":[\"int\",\"null\"]},{\"name\":\"favorite_color\",\"type\":[\"string\",\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -71,7 +71,11 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     return DECODER.decode(b);
   }
 
-  @Deprecated public java.lang.Long avro_fingerprint;
+  @Deprecated public long avro_fingerprint;
+  @Deprecated public java.lang.CharSequence index_ipid;
+  @Deprecated public long last_update_timestamp;
+  @Deprecated public java.lang.CharSequence last_update_loginid;
+  @Deprecated public java.lang.CharSequence partner_ipid;
   @Deprecated public java.lang.CharSequence name;
   @Deprecated public java.lang.Integer favorite_number;
   @Deprecated public java.lang.CharSequence favorite_color;
@@ -86,12 +90,20 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    * @param avro_fingerprint The new value for avro_fingerprint
+   * @param index_ipid The new value for index_ipid
+   * @param last_update_timestamp The new value for last_update_timestamp
+   * @param last_update_loginid The new value for last_update_loginid
+   * @param partner_ipid The new value for partner_ipid
    * @param name The new value for name
    * @param favorite_number The new value for favorite_number
    * @param favorite_color The new value for favorite_color
    */
-  public User(java.lang.Long avro_fingerprint, java.lang.CharSequence name, java.lang.Integer favorite_number, java.lang.CharSequence favorite_color) {
+  public User(java.lang.Long avro_fingerprint, java.lang.CharSequence index_ipid, java.lang.Long last_update_timestamp, java.lang.CharSequence last_update_loginid, java.lang.CharSequence partner_ipid, java.lang.CharSequence name, java.lang.Integer favorite_number, java.lang.CharSequence favorite_color) {
     this.avro_fingerprint = avro_fingerprint;
+    this.index_ipid = index_ipid;
+    this.last_update_timestamp = last_update_timestamp;
+    this.last_update_loginid = last_update_loginid;
+    this.partner_ipid = partner_ipid;
     this.name = name;
     this.favorite_number = favorite_number;
     this.favorite_color = favorite_color;
@@ -103,9 +115,13 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return avro_fingerprint;
-    case 1: return name;
-    case 2: return favorite_number;
-    case 3: return favorite_color;
+    case 1: return index_ipid;
+    case 2: return last_update_timestamp;
+    case 3: return last_update_loginid;
+    case 4: return partner_ipid;
+    case 5: return name;
+    case 6: return favorite_number;
+    case 7: return favorite_color;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -115,9 +131,13 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: avro_fingerprint = (java.lang.Long)value$; break;
-    case 1: name = (java.lang.CharSequence)value$; break;
-    case 2: favorite_number = (java.lang.Integer)value$; break;
-    case 3: favorite_color = (java.lang.CharSequence)value$; break;
+    case 1: index_ipid = (java.lang.CharSequence)value$; break;
+    case 2: last_update_timestamp = (java.lang.Long)value$; break;
+    case 3: last_update_loginid = (java.lang.CharSequence)value$; break;
+    case 4: partner_ipid = (java.lang.CharSequence)value$; break;
+    case 5: name = (java.lang.CharSequence)value$; break;
+    case 6: favorite_number = (java.lang.Integer)value$; break;
+    case 7: favorite_color = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -126,7 +146,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
    * Gets the value of the 'avro_fingerprint' field.
    * @return The value of the 'avro_fingerprint' field.
    */
-  public java.lang.Long getAvroFingerprint() {
+  public long getAvroFingerprint() {
     return avro_fingerprint;
   }
 
@@ -135,8 +155,76 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'avro_fingerprint' field.
    * @param value the value to set.
    */
-  public void setAvroFingerprint(java.lang.Long value) {
+  public void setAvroFingerprint(long value) {
     this.avro_fingerprint = value;
+  }
+
+  /**
+   * Gets the value of the 'index_ipid' field.
+   * @return The value of the 'index_ipid' field.
+   */
+  public java.lang.CharSequence getIndexIpid() {
+    return index_ipid;
+  }
+
+
+  /**
+   * Sets the value of the 'index_ipid' field.
+   * @param value the value to set.
+   */
+  public void setIndexIpid(java.lang.CharSequence value) {
+    this.index_ipid = value;
+  }
+
+  /**
+   * Gets the value of the 'last_update_timestamp' field.
+   * @return The value of the 'last_update_timestamp' field.
+   */
+  public long getLastUpdateTimestamp() {
+    return last_update_timestamp;
+  }
+
+
+  /**
+   * Sets the value of the 'last_update_timestamp' field.
+   * @param value the value to set.
+   */
+  public void setLastUpdateTimestamp(long value) {
+    this.last_update_timestamp = value;
+  }
+
+  /**
+   * Gets the value of the 'last_update_loginid' field.
+   * @return The value of the 'last_update_loginid' field.
+   */
+  public java.lang.CharSequence getLastUpdateLoginid() {
+    return last_update_loginid;
+  }
+
+
+  /**
+   * Sets the value of the 'last_update_loginid' field.
+   * @param value the value to set.
+   */
+  public void setLastUpdateLoginid(java.lang.CharSequence value) {
+    this.last_update_loginid = value;
+  }
+
+  /**
+   * Gets the value of the 'partner_ipid' field.
+   * @return The value of the 'partner_ipid' field.
+   */
+  public java.lang.CharSequence getPartnerIpid() {
+    return partner_ipid;
+  }
+
+
+  /**
+   * Sets the value of the 'partner_ipid' field.
+   * @param value the value to set.
+   */
+  public void setPartnerIpid(java.lang.CharSequence value) {
+    this.partner_ipid = value;
   }
 
   /**
@@ -231,7 +319,11 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<User>
     implements org.apache.avro.data.RecordBuilder<User> {
 
-    private java.lang.Long avro_fingerprint;
+    private long avro_fingerprint;
+    private java.lang.CharSequence index_ipid;
+    private long last_update_timestamp;
+    private java.lang.CharSequence last_update_loginid;
+    private java.lang.CharSequence partner_ipid;
     private java.lang.CharSequence name;
     private java.lang.Integer favorite_number;
     private java.lang.CharSequence favorite_color;
@@ -251,17 +343,33 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
         this.avro_fingerprint = data().deepCopy(fields()[0].schema(), other.avro_fingerprint);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.name)) {
-        this.name = data().deepCopy(fields()[1].schema(), other.name);
+      if (isValidValue(fields()[1], other.index_ipid)) {
+        this.index_ipid = data().deepCopy(fields()[1].schema(), other.index_ipid);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.favorite_number)) {
-        this.favorite_number = data().deepCopy(fields()[2].schema(), other.favorite_number);
+      if (isValidValue(fields()[2], other.last_update_timestamp)) {
+        this.last_update_timestamp = data().deepCopy(fields()[2].schema(), other.last_update_timestamp);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.favorite_color)) {
-        this.favorite_color = data().deepCopy(fields()[3].schema(), other.favorite_color);
+      if (isValidValue(fields()[3], other.last_update_loginid)) {
+        this.last_update_loginid = data().deepCopy(fields()[3].schema(), other.last_update_loginid);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
+      if (isValidValue(fields()[4], other.partner_ipid)) {
+        this.partner_ipid = data().deepCopy(fields()[4].schema(), other.partner_ipid);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
+      }
+      if (isValidValue(fields()[5], other.name)) {
+        this.name = data().deepCopy(fields()[5].schema(), other.name);
+        fieldSetFlags()[5] = other.fieldSetFlags()[5];
+      }
+      if (isValidValue(fields()[6], other.favorite_number)) {
+        this.favorite_number = data().deepCopy(fields()[6].schema(), other.favorite_number);
+        fieldSetFlags()[6] = other.fieldSetFlags()[6];
+      }
+      if (isValidValue(fields()[7], other.favorite_color)) {
+        this.favorite_color = data().deepCopy(fields()[7].schema(), other.favorite_color);
+        fieldSetFlags()[7] = other.fieldSetFlags()[7];
       }
     }
 
@@ -275,17 +383,33 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
         this.avro_fingerprint = data().deepCopy(fields()[0].schema(), other.avro_fingerprint);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.name)) {
-        this.name = data().deepCopy(fields()[1].schema(), other.name);
+      if (isValidValue(fields()[1], other.index_ipid)) {
+        this.index_ipid = data().deepCopy(fields()[1].schema(), other.index_ipid);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.favorite_number)) {
-        this.favorite_number = data().deepCopy(fields()[2].schema(), other.favorite_number);
+      if (isValidValue(fields()[2], other.last_update_timestamp)) {
+        this.last_update_timestamp = data().deepCopy(fields()[2].schema(), other.last_update_timestamp);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.favorite_color)) {
-        this.favorite_color = data().deepCopy(fields()[3].schema(), other.favorite_color);
+      if (isValidValue(fields()[3], other.last_update_loginid)) {
+        this.last_update_loginid = data().deepCopy(fields()[3].schema(), other.last_update_loginid);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.partner_ipid)) {
+        this.partner_ipid = data().deepCopy(fields()[4].schema(), other.partner_ipid);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.name)) {
+        this.name = data().deepCopy(fields()[5].schema(), other.name);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.favorite_number)) {
+        this.favorite_number = data().deepCopy(fields()[6].schema(), other.favorite_number);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.favorite_color)) {
+        this.favorite_color = data().deepCopy(fields()[7].schema(), other.favorite_color);
+        fieldSetFlags()[7] = true;
       }
     }
 
@@ -293,7 +417,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * Gets the value of the 'avro_fingerprint' field.
       * @return The value.
       */
-    public java.lang.Long getAvroFingerprint() {
+    public long getAvroFingerprint() {
       return avro_fingerprint;
     }
 
@@ -303,7 +427,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @param value The value of 'avro_fingerprint'.
       * @return This builder.
       */
-    public example.avro.User.Builder setAvroFingerprint(java.lang.Long value) {
+    public example.avro.User.Builder setAvroFingerprint(long value) {
       validate(fields()[0], value);
       this.avro_fingerprint = value;
       fieldSetFlags()[0] = true;
@@ -324,8 +448,166 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @return This builder.
       */
     public example.avro.User.Builder clearAvroFingerprint() {
-      avro_fingerprint = null;
       fieldSetFlags()[0] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'index_ipid' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getIndexIpid() {
+      return index_ipid;
+    }
+
+
+    /**
+      * Sets the value of the 'index_ipid' field.
+      * @param value The value of 'index_ipid'.
+      * @return This builder.
+      */
+    public example.avro.User.Builder setIndexIpid(java.lang.CharSequence value) {
+      validate(fields()[1], value);
+      this.index_ipid = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'index_ipid' field has been set.
+      * @return True if the 'index_ipid' field has been set, false otherwise.
+      */
+    public boolean hasIndexIpid() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'index_ipid' field.
+      * @return This builder.
+      */
+    public example.avro.User.Builder clearIndexIpid() {
+      index_ipid = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'last_update_timestamp' field.
+      * @return The value.
+      */
+    public long getLastUpdateTimestamp() {
+      return last_update_timestamp;
+    }
+
+
+    /**
+      * Sets the value of the 'last_update_timestamp' field.
+      * @param value The value of 'last_update_timestamp'.
+      * @return This builder.
+      */
+    public example.avro.User.Builder setLastUpdateTimestamp(long value) {
+      validate(fields()[2], value);
+      this.last_update_timestamp = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'last_update_timestamp' field has been set.
+      * @return True if the 'last_update_timestamp' field has been set, false otherwise.
+      */
+    public boolean hasLastUpdateTimestamp() {
+      return fieldSetFlags()[2];
+    }
+
+
+    /**
+      * Clears the value of the 'last_update_timestamp' field.
+      * @return This builder.
+      */
+    public example.avro.User.Builder clearLastUpdateTimestamp() {
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'last_update_loginid' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getLastUpdateLoginid() {
+      return last_update_loginid;
+    }
+
+
+    /**
+      * Sets the value of the 'last_update_loginid' field.
+      * @param value The value of 'last_update_loginid'.
+      * @return This builder.
+      */
+    public example.avro.User.Builder setLastUpdateLoginid(java.lang.CharSequence value) {
+      validate(fields()[3], value);
+      this.last_update_loginid = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'last_update_loginid' field has been set.
+      * @return True if the 'last_update_loginid' field has been set, false otherwise.
+      */
+    public boolean hasLastUpdateLoginid() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'last_update_loginid' field.
+      * @return This builder.
+      */
+    public example.avro.User.Builder clearLastUpdateLoginid() {
+      last_update_loginid = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'partner_ipid' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getPartnerIpid() {
+      return partner_ipid;
+    }
+
+
+    /**
+      * Sets the value of the 'partner_ipid' field.
+      * @param value The value of 'partner_ipid'.
+      * @return This builder.
+      */
+    public example.avro.User.Builder setPartnerIpid(java.lang.CharSequence value) {
+      validate(fields()[4], value);
+      this.partner_ipid = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'partner_ipid' field has been set.
+      * @return True if the 'partner_ipid' field has been set, false otherwise.
+      */
+    public boolean hasPartnerIpid() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'partner_ipid' field.
+      * @return This builder.
+      */
+    public example.avro.User.Builder clearPartnerIpid() {
+      partner_ipid = null;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -344,9 +626,9 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @return This builder.
       */
     public example.avro.User.Builder setName(java.lang.CharSequence value) {
-      validate(fields()[1], value);
+      validate(fields()[5], value);
       this.name = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[5] = true;
       return this;
     }
 
@@ -355,7 +637,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @return True if the 'name' field has been set, false otherwise.
       */
     public boolean hasName() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[5];
     }
 
 
@@ -365,7 +647,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       */
     public example.avro.User.Builder clearName() {
       name = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -384,9 +666,9 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @return This builder.
       */
     public example.avro.User.Builder setFavoriteNumber(java.lang.Integer value) {
-      validate(fields()[2], value);
+      validate(fields()[6], value);
       this.favorite_number = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -395,7 +677,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @return True if the 'favorite_number' field has been set, false otherwise.
       */
     public boolean hasFavoriteNumber() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[6];
     }
 
 
@@ -405,7 +687,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       */
     public example.avro.User.Builder clearFavoriteNumber() {
       favorite_number = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -424,9 +706,9 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @return This builder.
       */
     public example.avro.User.Builder setFavoriteColor(java.lang.CharSequence value) {
-      validate(fields()[3], value);
+      validate(fields()[7], value);
       this.favorite_color = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[7] = true;
       return this;
     }
 
@@ -435,7 +717,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       * @return True if the 'favorite_color' field has been set, false otherwise.
       */
     public boolean hasFavoriteColor() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[7];
     }
 
 
@@ -445,7 +727,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       */
     public example.avro.User.Builder clearFavoriteColor() {
       favorite_color = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
@@ -455,9 +737,13 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       try {
         User record = new User();
         record.avro_fingerprint = fieldSetFlags()[0] ? this.avro_fingerprint : (java.lang.Long) defaultValue(fields()[0]);
-        record.name = fieldSetFlags()[1] ? this.name : (java.lang.CharSequence) defaultValue(fields()[1]);
-        record.favorite_number = fieldSetFlags()[2] ? this.favorite_number : (java.lang.Integer) defaultValue(fields()[2]);
-        record.favorite_color = fieldSetFlags()[3] ? this.favorite_color : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.index_ipid = fieldSetFlags()[1] ? this.index_ipid : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.last_update_timestamp = fieldSetFlags()[2] ? this.last_update_timestamp : (java.lang.Long) defaultValue(fields()[2]);
+        record.last_update_loginid = fieldSetFlags()[3] ? this.last_update_loginid : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.partner_ipid = fieldSetFlags()[4] ? this.partner_ipid : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.name = fieldSetFlags()[5] ? this.name : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.favorite_number = fieldSetFlags()[6] ? this.favorite_number : (java.lang.Integer) defaultValue(fields()[6]);
+        record.favorite_color = fieldSetFlags()[7] ? this.favorite_color : (java.lang.CharSequence) defaultValue(fields()[7]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -490,13 +776,15 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
-    if (this.avro_fingerprint == null) {
-      out.writeIndex(1);
-      out.writeNull();
-    } else {
-      out.writeIndex(0);
-      out.writeLong(this.avro_fingerprint);
-    }
+    out.writeLong(this.avro_fingerprint);
+
+    out.writeString(this.index_ipid);
+
+    out.writeLong(this.last_update_timestamp);
+
+    out.writeString(this.last_update_loginid);
+
+    out.writeString(this.partner_ipid);
 
     out.writeString(this.name);
 
@@ -523,12 +811,15 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
-      if (in.readIndex() != 0) {
-        in.readNull();
-        this.avro_fingerprint = null;
-      } else {
-        this.avro_fingerprint = in.readLong();
-      }
+      this.avro_fingerprint = in.readLong();
+
+      this.index_ipid = in.readString(this.index_ipid instanceof Utf8 ? (Utf8)this.index_ipid : null);
+
+      this.last_update_timestamp = in.readLong();
+
+      this.last_update_loginid = in.readString(this.last_update_loginid instanceof Utf8 ? (Utf8)this.last_update_loginid : null);
+
+      this.partner_ipid = in.readString(this.partner_ipid instanceof Utf8 ? (Utf8)this.partner_ipid : null);
 
       this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
 
@@ -547,22 +838,33 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       }
 
     } else {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 8; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          if (in.readIndex() != 0) {
-            in.readNull();
-            this.avro_fingerprint = null;
-          } else {
-            this.avro_fingerprint = in.readLong();
-          }
+          this.avro_fingerprint = in.readLong();
           break;
 
         case 1:
-          this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
+          this.index_ipid = in.readString(this.index_ipid instanceof Utf8 ? (Utf8)this.index_ipid : null);
           break;
 
         case 2:
+          this.last_update_timestamp = in.readLong();
+          break;
+
+        case 3:
+          this.last_update_loginid = in.readString(this.last_update_loginid instanceof Utf8 ? (Utf8)this.last_update_loginid : null);
+          break;
+
+        case 4:
+          this.partner_ipid = in.readString(this.partner_ipid instanceof Utf8 ? (Utf8)this.partner_ipid : null);
+          break;
+
+        case 5:
+          this.name = in.readString(this.name instanceof Utf8 ? (Utf8)this.name : null);
+          break;
+
+        case 6:
           if (in.readIndex() != 0) {
             in.readNull();
             this.favorite_number = null;
@@ -571,7 +873,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
           }
           break;
 
-        case 3:
+        case 7:
           if (in.readIndex() != 0) {
             in.readNull();
             this.favorite_color = null;
