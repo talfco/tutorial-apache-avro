@@ -1,0 +1,10 @@
+@startuml
+Sender -> Sender: avroParser(schemaFile): schema
+Sender -> SchemaRegistryFactory: getSchemaRegistry(fileBasedType)
+SchemaRegistryFactory -> FileSchemaRegistry: initialize()
+FileSchemaRegistry --> Sender
+Sender -> FileSchemaRegistry: registerSchema(schema)
+FileSchemaRegistry -> FileSchemaRegistry: generateFingerprint():long
+FileSchemaRegistry -> FileSchemaRegistry: copySchemaToRegistryDirectory()
+FileSchemaRegistry --> Sender: schemaFingerprint as long
+@enduml

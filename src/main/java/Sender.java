@@ -15,8 +15,7 @@ import java.nio.ByteBuffer;
 
 public class Sender {
 
-    public static byte[] sendUserMessage () throws IOException {
-        Schema schema = new Schema.Parser().parse(new File("src/main/avro/helloWorld.avsc"));
+    public static byte[] sendUserMessage (Schema schema) throws IOException {
         SchemaRegistry registry = SchemaRegistryFactory.getSchemaRegistry(SchemaRegistryFactory.registryFileBased);
         long fingerprint = registry.registerSchema(schema);
         String elasticSearchMapping = ElasticSearchMapper.convertToESMapping(schema);
