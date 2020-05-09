@@ -6,6 +6,8 @@ import org.apache.avro.SchemaNormalization;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Iterator;
+import java.util.List;
 
 public class FileSchemaRegistry extends SchemaRegistry {
 
@@ -31,8 +33,15 @@ public class FileSchemaRegistry extends SchemaRegistry {
                 return name.startsWith(Long.toString(fingerprint));
             } });
         assert(files.length ==1);
-        String content = Files.readString(files[0].toPath(), StandardCharsets.UTF_8);
+        List<String> lines = Files.readAllLines(files[0].toPath());
+        Iterator<String> it = lines.iterator();
+        String content = "";
+        while (it.hasNext()) {
+            content += it.next();
+        }
+
         Schema schema = new Schema.Parser().parse(content);
-         return schema;
+        return schema;
+
     };
 }
