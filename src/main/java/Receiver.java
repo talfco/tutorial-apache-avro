@@ -1,5 +1,6 @@
 import net.cloudburo.avro.registry.SchemaRegistry;
 import net.cloudburo.avro.registry.SchemaRegistryFactory;
+import net.cloudburo.elasticsearch.JestDemoApplication;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericDatumWriter;
@@ -10,19 +11,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+import org.apache.log4j.Logger;
+
 public class Receiver {
 
-    public static void receive (byte[] msg) throws IOException {
+    private static Logger logger = Logger.getLogger(Receiver.class);
+
+    public static String receive (byte[] msg) throws IOException {
         if (checkForAvroSingleObjectEncoding(msg)) {
             long fingerprint = getAvroFingerprint(msg);
             SchemaRegistry registry = SchemaRegistryFactory.getSchemaRegistry(SchemaRegistryFactory.registryFileBased);
             Schema schema = registry.getSchema(fingerprint);
             byte[] payload = extractPayload(msg);
             String jsonDoc = convertAvroBinaryToJSON(payload,schema);
-            System.out.println(jsonDoc);
+            return jsonDoc;
         }
         else {
-            System.err.println("Received message wasn't Avro Single Object encoded");
+            logger.error("Received message wasn't Avro Single Object encoded");
+            throw new IOException("Received message wasn't Avro Single Object encoded");
         }
     }
 

@@ -9,6 +9,7 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import java.io.IOException;
 import java.util.List;
 
+
 import static org.apache.avro.Schema.Type.*;
 
 public class ElasticSearchMapper {

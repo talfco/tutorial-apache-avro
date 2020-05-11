@@ -13,13 +13,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+
 public class Sender {
 
     public static byte[] sendUserMessage (Schema schema) throws IOException {
         SchemaRegistry registry = SchemaRegistryFactory.getSchemaRegistry(SchemaRegistryFactory.registryFileBased);
         long fingerprint = registry.registerSchema(schema);
-        String elasticSearchMapping = ElasticSearchMapper.convertToESMapping(schema);
-        System.out.println("ES Mapping "+elasticSearchMapping);
         return produceBinaryAvroMessage(TestLoader.getUser(),schema, fingerprint);
     }
 
