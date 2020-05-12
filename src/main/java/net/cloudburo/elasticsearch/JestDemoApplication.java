@@ -193,13 +193,13 @@ public class JestDemoApplication {
     }
 
     public static void createDoc(JestClient jestClient, String source) throws IOException {
-        Index index = new Index.Builder(source).index("employees").type("profile").build();
+        Index index = new Index.Builder(source).index("employees").type("profile").id("811601d4-223b-43f9-8a68-4ee9b093ed6f").build();
         JestResult jestResult =  jestClient.execute(index);
         if(jestResult.isSucceeded()) {
-            System.out.println("Success Create Dox!");
+            logger.info("Success Create Dox!");
         }
         else {
-            System.out.println(jestResult.getErrorMessage());
+            logger.error(jestResult);
         }
     }
 

@@ -19,25 +19,25 @@ public class ElasticSearchMapper {
 
     private static Logger logger = Logger.getLogger(ElasticSearchMapper.class);
 
-    public static String convertToESMapping(String index, Schema avroSchema) throws IOException {
-        final List<Schema.Field> fields = avroSchema.getFields();
+    public static String convertToESMapping(String index, String type, Schema avroSchemaForType) throws IOException {
+        final List<Schema.Field> fields = avroSchemaForType.getFields();
         XContentBuilder builder = XContentFactory.jsonBuilder();
 
         builder.startObject();
         {
 
 
-                builder.startObject(index);
+                builder.startObject(type);
                 {
-                    builder.field("dynamic", "true");
-                    builder.field("numeric_detection", true);
+                    //builder.field("dynamic", "true");
+                    //builder.field("numeric_detection", true);
 
                     for (Schema.Field field : fields) {
-                        if (field.name().equals(INDEXER_ATTR)) {
-                            builder.startObject("_id");
-                            builder.field("path",INDEXER_ATTR);
-                            builder.endObject();
-                        }
+                        //if (field.name().equals(INDEXER_ATTR)) {
+                        //    builder.startObject("_id");
+                        //    builder.field("path",INDEXER_ATTR);
+                        //    builder.endObject();
+                        //}
                     }
 
                     builder.startObject("properties");
