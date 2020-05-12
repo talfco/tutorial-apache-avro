@@ -1,0 +1,30 @@
+{"namespace": "business.model.strategy",
+  "type": "record",
+  "name": "BusinessModelStrategy",
+  "fields": [
+    {"name": "avro_fingerprint", "type": "long"},
+    {"name": "index_ipid", "type": "string"},
+    {"name": "last_update_timestamp", "type": "long", "logical-type":"time-micros"},
+    {"name": "last_update_loginid", "type": "string"},
+    {"name": "partner_ipid", "type": "string"},
+    {"name": "drivers", "type": "string"},
+    {"name": "competencies", "type": "string"},
+    {"name": "capabilities", "type": "string"},
+    {"name": "client_structure", "type": "string"},
+    {"name": "goals", "type": "string"},
+    {"name": "sales_market_region",
+                "type": ["null",  {
+                        "type": "enum",
+                        "name" : "code",
+                        "symbols": ["M49_150","M49_142", "M49_021", "M49_756", "other"]
+                        }]
+    },
+    {"name": "sales_country_150",
+                "type" : [ "null", {
+                         "type": "array",
+                         "items": "string"
+                         }]
+    }
+
+  ]
+}
