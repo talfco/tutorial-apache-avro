@@ -1,0 +1,64 @@
+[
+{   "namespace" : "business.model.strategy",
+    "type": "enum",
+    "doc": "Market Regions Enumeration using UNO M49 standard: https://unstats.un.org/unsd/methodology/m49",
+    "name" : "MarketRegionsEnum",
+    "symbols": ["M49_150","M49_142", "M49_021", "M49_756", "other"]
+},
+{ "namespace": "business.model.strategy",
+  "type": "record",
+  "doc" : "Schema for the Coporate Business Model Strategy Part",
+  "name": "BusinessModelStrategy",
+  "fields": [
+    { "name": "avro_fingerprint", "type": "long"},
+    { "name": "index_ipid", "type": "string"},
+    { "name": "last_update_timestamp", "type": "long", "logical-type":"time-micros"},
+    { "name": "last_update_loginid", "type": "string"},
+    { "name": "partner_ipid", "type": "string"},
+    { "name": "drivers", "type": [ "null", { "type": "string" } ], "default": null},
+    { "name": "competencies", "type": [ "null", { "type": "string" }],"default": null},
+    { "name": "capabilities", "type": [ "null", { "type": "string" }],"default": null},
+    { "name": "client_structure", "type": [ "null", { "type": "string" }],"default": null},
+    { "name": "goals", "type": [ "null", { "type": "string" }],"default": null},
+    { "name": "sales_regions",
+      "type": [ "null", {
+                    "type": "array",
+                    "items": "MarketRegionsEnum" }
+              ],
+      "default": null
+    },
+    { "name": "sales_countries_150",
+      "doc" : "Countries in Europe Region (ISO 3166-1 alpha-2)",
+      "type": [ "null", {
+                    "type": "array",
+                    "items": "string" }
+              ],
+      "default": null
+    },
+    { "name": "sales_countries_142",
+      "doc": "Countries in Asia Region (M49 codes)",
+      "type": [ "null", {
+                    "type": "array",
+                    "items": "string" }
+              ],
+      "default": null
+    },
+    { "name": "sales_countries_021",
+      "doc" : "Countries in North America Region (M49 codes)",
+      "type": [ "null", {
+                     "type": "array",
+                     "items": "string" }
+              ],
+      "default": null
+    },
+    { "name": "sales_countries_other",
+      "doc" : "Countries in Other Region (M49 codes)",
+      "type": [ "null", {
+                     "type": "array",
+                     "items": "string" }
+              ],
+       "default": null
+    }
+  ]
+}
+]
