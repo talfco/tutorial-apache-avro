@@ -27,7 +27,7 @@ public class JestDemoApplication {
     public static void main(String[] args) throws IOException {
 
         // Demo the JestClient
-        JestClient jestClient = jestClient();
+        JestClient jestClient = jestClient("","","");
 
         // Check an index
         JestResult result = jestClient.execute(new IndicesExists.Builder("employees").build());
@@ -204,15 +204,15 @@ public class JestDemoApplication {
     }
 
 
-    public static JestClient jestClient()
+    public static JestClient jestClient(String esURL, String user, String password)
     {
         JestClientFactory factory = new JestClientFactory();
         factory.setHttpClientConfig(
-                new HttpClientConfig.Builder("https://a8dc162fc83443abb8b543506a4565dc.eastus2.azure.elastic-cloud.com:9243")
+                new HttpClientConfig.Builder(esURL)
                         .multiThreaded(true)
                         .defaultMaxTotalConnectionPerRoute(2)
                         .maxTotalConnection(20)
-                        .defaultCredentials("test","testtest")
+                        .defaultCredentials(user,password)
                         .build());
         return factory.getObject();
     }

@@ -15,10 +15,9 @@ public class HelloWorld {
         String payloadJson = Receiver.receive(msg);
         System.out.println("Payload: "+payloadJson);
 
-        String mappingJson = ElasticSearchMapper.convertToESMapping(schema);
-        System.out.println("ES Mapping: "+ mappingJson);
+        String mappingJson = ElasticSearchMapper.convertToESMapping("employee",schema);
         
-        JestClient cli = JestDemoApplication.jestClient();
+        JestClient cli = JestDemoApplication.jestClient(args[0], args[1],args[2]);
         System.out.println("Got Connection "+cli.toString());
         JestDemoApplication.createIndex(cli,"employee","profile", mappingJson);
         //JestDemoApplication.createDoc(cli,payloadJson);
