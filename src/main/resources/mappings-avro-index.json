@@ -1,0 +1,11 @@
+{
+      "properties": {
+        "namespace": {
+          "type": "keyword",
+          "index": "true"
+        },
+        "avroschema": {
+          "enabled": "false"
+        }
+      }
+}

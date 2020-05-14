@@ -1,5 +1,7 @@
 package net.cloudburo.avro.registry;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import net.cloudburo.elasticsearch.ESPersistencyManager;
 import org.apache.avro.Schema;
 
@@ -17,13 +19,19 @@ public class ElasticSearchSchemaRegistry extends SchemaRegistry {
 
     public  long registerSchema(Schema schema) throws IOException {
         long fingerprint = getSchemaFingerprint(schema);
-        esManager.createUpdateDocument(esIndex,"schema",schema.toString(false),Long.valueOf(fingerprint).toString());
+        String avroJSONSchema = schema.toString(true);
+        String doc = "{";
+        doc+= "\"namespace\":"+"\""+schema.getNamespace()+"."+schema.getName()+"\",";
+        doc+= "\"avroschema\":"+avroJSONSchema;
+        doc+= "}";
+        esManager.createUpdateDocument(esIndex,"schema",doc,Long.valueOf(fingerprint).toString());
         return fingerprint;
     }
 
     public  Schema getSchema(long fingerprint) throws IOException {
-        String jsonDoc = esManager.readDocumentById(esIndex, Long.valueOf(fingerprint).toString());
-        Schema schema = new Schema.Parser().parse(jsonDoc);
+        JsonObject jsonDoc = esManager.readDocumentByIdAsObject(esIndex, Long.valueOf(fingerprint).toString());
+        String json = jsonDoc.get("_source").getAsJsonObject().get("avroschema").toString();
+        Schema schema = new Schema.Parser().parse(json);
         return schema;
     }
 

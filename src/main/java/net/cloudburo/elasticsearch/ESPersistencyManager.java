@@ -1,5 +1,6 @@
 package net.cloudburo.elasticsearch;
 
+import com.google.gson.JsonObject;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestClientFactory;
 import io.searchbox.client.JestResult;
@@ -69,7 +70,11 @@ public class ESPersistencyManager {
     }
 
     public String readDocumentById(String index,String id) throws IOException{
-        return esClient.execute(new Get.Builder("index", id).build()).getJsonString();
+        return esClient.execute(new Get.Builder(index, id).build()).getJsonString();
+    }
+
+    public JsonObject readDocumentByIdAsObject(String index, String id) throws IOException{
+        return esClient.execute(new Get.Builder(index, id).build()).getJsonObject();
     }
 
     private  JestClient connectES(String esURL, String user, String password) {

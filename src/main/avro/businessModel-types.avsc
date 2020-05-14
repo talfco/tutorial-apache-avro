@@ -1,6 +1,0 @@
-{   "namespace" : "business.model.strategy",
-    "type": "enum",
-    "doc": "Market Regions Enumeration using UNO M49 standard: https://unstats.un.org/unsd/methodology/m49",
-    "name" : "MarketRegionsEnum",
-    "symbols": ["M49_150","M49_142", "M49_021", "M49_756", "other"]
-}

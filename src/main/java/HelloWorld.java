@@ -6,6 +6,8 @@ import net.cloudburo.avro.registry.SchemaRegistryFactory;
 import net.cloudburo.elasticsearch.ESPersistencyManager;
 import org.apache.avro.Schema;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -36,6 +38,8 @@ public class HelloWorld {
         if (!esPersistencyManager.existsIndex("avroschema")) {
             esPersistencyManager.createIndex("avroschema");
         }
+        String mappings = new String ( Files.readAllBytes( Paths.get("src/main/resources/mappings-avro-index.json") ) );
+        esPersistencyManager.updateESMapping("avroschema","schema",mappings);
 
         // ==============================================================================================
         // Registration of our Schema (Data Interface Contract) in an Avro Schema Registry.
@@ -82,9 +86,5 @@ public class HelloWorld {
 
         //String mappingJson = ElasticSearchMapper.convertToESMapping("employee","profile",schema);
         //logger.info("ES Mapping JSON"+mappingJson);
-        //JestClient cli = JestDemoApplication.jestClient(args[0], args[1],args[2]);
-        //System.out.println("Got ElasticSearch Connection "+cli.toString());
-        //JestDemoApplication.createUpdateIndex(cli,"employee","profile", mappingJson);
-        //JestDemoApplication.createDoc(cli,payloadJson);
     }
 }
