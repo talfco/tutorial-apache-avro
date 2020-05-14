@@ -1,10 +1,8 @@
 package net.cloudburo.avro.registry;
 
 import org.apache.avro.Schema;
-import org.apache.avro.SchemaNormalization;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +12,7 @@ public class FileSchemaRegistry extends SchemaRegistry {
     private final static String registryLocation = "schemaRegistry";
 
     public  long registerSchema(Schema schema) throws IOException {
-        long fingerprint = SchemaNormalization.parsingFingerprint64(schema);
+        long fingerprint = getSchemaFingerprint(schema);
         String fiName = Long.valueOf(fingerprint).toString()+"."+schema.getNamespace()+"."+schema.getName()+".avsc";
         // An Avro Schema File with a Fingerprint is immutable
         if (!new File(fiName).exists()) {
@@ -39,7 +37,6 @@ public class FileSchemaRegistry extends SchemaRegistry {
         while (it.hasNext()) {
             content += it.next();
         }
-
         Schema schema = new Schema.Parser().parse(content);
         return schema;
 

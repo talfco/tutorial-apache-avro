@@ -166,8 +166,7 @@ public class JestDemoApplication {
         });
     }
 
-    // Create an index
-    public static void createIndex(JestClient jestClient, String index, String baseType, String mappingJson) throws IOException {
+    public static void createUpdateIndex(JestClient jestClient, String index, String baseType, String mappingJson) throws IOException {
 
         boolean indexExists = jestClient.execute(new IndicesExists.Builder(index).build()).isSucceeded();
         if (indexExists) {

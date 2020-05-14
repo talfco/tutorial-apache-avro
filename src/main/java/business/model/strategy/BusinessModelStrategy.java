@@ -12,10 +12,11 @@ import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
+/** Schema for the Coporate Business Model Strategy Part */
 @org.apache.avro.specific.AvroGenerated
 public class BusinessModelStrategy extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6305860820886658986L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BusinessModelStrategy\",\"namespace\":\"business.model.strategy\",\"fields\":[{\"name\":\"avro_fingerprint\",\"type\":\"long\"},{\"name\":\"index_ipid\",\"type\":\"string\"},{\"name\":\"last_update_timestamp\",\"type\":\"long\",\"logical-type\":\"time-micros\"},{\"name\":\"last_update_loginid\",\"type\":\"string\"},{\"name\":\"partner_ipid\",\"type\":\"string\"},{\"name\":\"drivers\",\"type\":\"string\"},{\"name\":\"competencies\",\"type\":\"string\"},{\"name\":\"capabilities\",\"type\":\"string\"},{\"name\":\"client_structure\",\"type\":\"string\"},{\"name\":\"goals\",\"type\":\"string\"},{\"name\":\"sales_market_region\",\"type\":[\"null\",{\"type\":\"enum\",\"name\":\"code\",\"symbols\":[\"M49_150\",\"M49_142\",\"M49_021\",\"M49_756\",\"other\"]}]},{\"name\":\"sales_country_150\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}]}]}");
+  private static final long serialVersionUID = 8354639983941950121L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BusinessModelStrategy\",\"namespace\":\"business.model.strategy\",\"doc\":\"Schema for the Coporate Business Model Strategy Part\",\"fields\":[{\"name\":\"avro_fingerprint\",\"type\":\"long\"},{\"name\":\"index_ipid\",\"type\":\"string\"},{\"name\":\"last_update_timestamp\",\"type\":\"long\",\"logical-type\":\"time-micros\"},{\"name\":\"last_update_loginid\",\"type\":\"string\"},{\"name\":\"partner_ipid\",\"type\":\"string\"},{\"name\":\"drivers\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"competencies\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"capabilities\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"client_structure\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"goals\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"sales_regions\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"enum\",\"name\":\"MarketRegionsEnum\",\"doc\":\"Market Regions Enumeration using UNO M49 standard: https://unstats.un.org/unsd/methodology/m49\",\"symbols\":[\"M49_150\",\"M49_142\",\"M49_021\",\"M49_756\",\"other\"]}}],\"default\":null},{\"name\":\"sales_countries_150\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}],\"doc\":\"Countries in Europe Region (ISO 3166-1 alpha-2)\",\"default\":null},{\"name\":\"sales_countries_142\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}],\"doc\":\"Countries in Asia Region (M49 codes)\",\"default\":null},{\"name\":\"sales_countries_021\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}],\"doc\":\"Countries in North America Region (M49 codes)\",\"default\":null},{\"name\":\"sales_countries_other\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}],\"doc\":\"Countries in Other Region (M49 codes)\",\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -81,8 +82,15 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
   @Deprecated public java.lang.CharSequence capabilities;
   @Deprecated public java.lang.CharSequence client_structure;
   @Deprecated public java.lang.CharSequence goals;
-  @Deprecated public business.model.strategy.code sales_market_region;
-  @Deprecated public java.util.List<java.lang.CharSequence> sales_country_150;
+  @Deprecated public java.util.List<business.model.strategy.MarketRegionsEnum> sales_regions;
+  /** Countries in Europe Region (ISO 3166-1 alpha-2) */
+  @Deprecated public java.util.List<java.lang.CharSequence> sales_countries_150;
+  /** Countries in Asia Region (M49 codes) */
+  @Deprecated public java.util.List<java.lang.CharSequence> sales_countries_142;
+  /** Countries in North America Region (M49 codes) */
+  @Deprecated public java.util.List<java.lang.CharSequence> sales_countries_021;
+  /** Countries in Other Region (M49 codes) */
+  @Deprecated public java.util.List<java.lang.CharSequence> sales_countries_other;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -103,10 +111,13 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
    * @param capabilities The new value for capabilities
    * @param client_structure The new value for client_structure
    * @param goals The new value for goals
-   * @param sales_market_region The new value for sales_market_region
-   * @param sales_country_150 The new value for sales_country_150
+   * @param sales_regions The new value for sales_regions
+   * @param sales_countries_150 Countries in Europe Region (ISO 3166-1 alpha-2)
+   * @param sales_countries_142 Countries in Asia Region (M49 codes)
+   * @param sales_countries_021 Countries in North America Region (M49 codes)
+   * @param sales_countries_other Countries in Other Region (M49 codes)
    */
-  public BusinessModelStrategy(java.lang.Long avro_fingerprint, java.lang.CharSequence index_ipid, java.lang.Long last_update_timestamp, java.lang.CharSequence last_update_loginid, java.lang.CharSequence partner_ipid, java.lang.CharSequence drivers, java.lang.CharSequence competencies, java.lang.CharSequence capabilities, java.lang.CharSequence client_structure, java.lang.CharSequence goals, business.model.strategy.code sales_market_region, java.util.List<java.lang.CharSequence> sales_country_150) {
+  public BusinessModelStrategy(java.lang.Long avro_fingerprint, java.lang.CharSequence index_ipid, java.lang.Long last_update_timestamp, java.lang.CharSequence last_update_loginid, java.lang.CharSequence partner_ipid, java.lang.CharSequence drivers, java.lang.CharSequence competencies, java.lang.CharSequence capabilities, java.lang.CharSequence client_structure, java.lang.CharSequence goals, java.util.List<business.model.strategy.MarketRegionsEnum> sales_regions, java.util.List<java.lang.CharSequence> sales_countries_150, java.util.List<java.lang.CharSequence> sales_countries_142, java.util.List<java.lang.CharSequence> sales_countries_021, java.util.List<java.lang.CharSequence> sales_countries_other) {
     this.avro_fingerprint = avro_fingerprint;
     this.index_ipid = index_ipid;
     this.last_update_timestamp = last_update_timestamp;
@@ -117,8 +128,11 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
     this.capabilities = capabilities;
     this.client_structure = client_structure;
     this.goals = goals;
-    this.sales_market_region = sales_market_region;
-    this.sales_country_150 = sales_country_150;
+    this.sales_regions = sales_regions;
+    this.sales_countries_150 = sales_countries_150;
+    this.sales_countries_142 = sales_countries_142;
+    this.sales_countries_021 = sales_countries_021;
+    this.sales_countries_other = sales_countries_other;
   }
 
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
@@ -136,8 +150,11 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
     case 7: return capabilities;
     case 8: return client_structure;
     case 9: return goals;
-    case 10: return sales_market_region;
-    case 11: return sales_country_150;
+    case 10: return sales_regions;
+    case 11: return sales_countries_150;
+    case 12: return sales_countries_142;
+    case 13: return sales_countries_021;
+    case 14: return sales_countries_other;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -156,8 +173,11 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
     case 7: capabilities = (java.lang.CharSequence)value$; break;
     case 8: client_structure = (java.lang.CharSequence)value$; break;
     case 9: goals = (java.lang.CharSequence)value$; break;
-    case 10: sales_market_region = (business.model.strategy.code)value$; break;
-    case 11: sales_country_150 = (java.util.List<java.lang.CharSequence>)value$; break;
+    case 10: sales_regions = (java.util.List<business.model.strategy.MarketRegionsEnum>)value$; break;
+    case 11: sales_countries_150 = (java.util.List<java.lang.CharSequence>)value$; break;
+    case 12: sales_countries_142 = (java.util.List<java.lang.CharSequence>)value$; break;
+    case 13: sales_countries_021 = (java.util.List<java.lang.CharSequence>)value$; break;
+    case 14: sales_countries_other = (java.util.List<java.lang.CharSequence>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -333,37 +353,92 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
   }
 
   /**
-   * Gets the value of the 'sales_market_region' field.
-   * @return The value of the 'sales_market_region' field.
+   * Gets the value of the 'sales_regions' field.
+   * @return The value of the 'sales_regions' field.
    */
-  public business.model.strategy.code getSalesMarketRegion() {
-    return sales_market_region;
+  public java.util.List<business.model.strategy.MarketRegionsEnum> getSalesRegions() {
+    return sales_regions;
   }
 
 
   /**
-   * Sets the value of the 'sales_market_region' field.
+   * Sets the value of the 'sales_regions' field.
    * @param value the value to set.
    */
-  public void setSalesMarketRegion(business.model.strategy.code value) {
-    this.sales_market_region = value;
+  public void setSalesRegions(java.util.List<business.model.strategy.MarketRegionsEnum> value) {
+    this.sales_regions = value;
   }
 
   /**
-   * Gets the value of the 'sales_country_150' field.
-   * @return The value of the 'sales_country_150' field.
+   * Gets the value of the 'sales_countries_150' field.
+   * @return Countries in Europe Region (ISO 3166-1 alpha-2)
    */
-  public java.util.List<java.lang.CharSequence> getSalesCountry150() {
-    return sales_country_150;
+  public java.util.List<java.lang.CharSequence> getSalesCountries150() {
+    return sales_countries_150;
   }
 
 
   /**
-   * Sets the value of the 'sales_country_150' field.
+   * Sets the value of the 'sales_countries_150' field.
+   * Countries in Europe Region (ISO 3166-1 alpha-2)
    * @param value the value to set.
    */
-  public void setSalesCountry150(java.util.List<java.lang.CharSequence> value) {
-    this.sales_country_150 = value;
+  public void setSalesCountries150(java.util.List<java.lang.CharSequence> value) {
+    this.sales_countries_150 = value;
+  }
+
+  /**
+   * Gets the value of the 'sales_countries_142' field.
+   * @return Countries in Asia Region (M49 codes)
+   */
+  public java.util.List<java.lang.CharSequence> getSalesCountries142() {
+    return sales_countries_142;
+  }
+
+
+  /**
+   * Sets the value of the 'sales_countries_142' field.
+   * Countries in Asia Region (M49 codes)
+   * @param value the value to set.
+   */
+  public void setSalesCountries142(java.util.List<java.lang.CharSequence> value) {
+    this.sales_countries_142 = value;
+  }
+
+  /**
+   * Gets the value of the 'sales_countries_021' field.
+   * @return Countries in North America Region (M49 codes)
+   */
+  public java.util.List<java.lang.CharSequence> getSalesCountries021() {
+    return sales_countries_021;
+  }
+
+
+  /**
+   * Sets the value of the 'sales_countries_021' field.
+   * Countries in North America Region (M49 codes)
+   * @param value the value to set.
+   */
+  public void setSalesCountries021(java.util.List<java.lang.CharSequence> value) {
+    this.sales_countries_021 = value;
+  }
+
+  /**
+   * Gets the value of the 'sales_countries_other' field.
+   * @return Countries in Other Region (M49 codes)
+   */
+  public java.util.List<java.lang.CharSequence> getSalesCountriesOther() {
+    return sales_countries_other;
+  }
+
+
+  /**
+   * Sets the value of the 'sales_countries_other' field.
+   * Countries in Other Region (M49 codes)
+   * @param value the value to set.
+   */
+  public void setSalesCountriesOther(java.util.List<java.lang.CharSequence> value) {
+    this.sales_countries_other = value;
   }
 
   /**
@@ -417,8 +492,15 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
     private java.lang.CharSequence capabilities;
     private java.lang.CharSequence client_structure;
     private java.lang.CharSequence goals;
-    private business.model.strategy.code sales_market_region;
-    private java.util.List<java.lang.CharSequence> sales_country_150;
+    private java.util.List<business.model.strategy.MarketRegionsEnum> sales_regions;
+    /** Countries in Europe Region (ISO 3166-1 alpha-2) */
+    private java.util.List<java.lang.CharSequence> sales_countries_150;
+    /** Countries in Asia Region (M49 codes) */
+    private java.util.List<java.lang.CharSequence> sales_countries_142;
+    /** Countries in North America Region (M49 codes) */
+    private java.util.List<java.lang.CharSequence> sales_countries_021;
+    /** Countries in Other Region (M49 codes) */
+    private java.util.List<java.lang.CharSequence> sales_countries_other;
 
     /** Creates a new Builder */
     private Builder() {
@@ -471,13 +553,25 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
         this.goals = data().deepCopy(fields()[9].schema(), other.goals);
         fieldSetFlags()[9] = other.fieldSetFlags()[9];
       }
-      if (isValidValue(fields()[10], other.sales_market_region)) {
-        this.sales_market_region = data().deepCopy(fields()[10].schema(), other.sales_market_region);
+      if (isValidValue(fields()[10], other.sales_regions)) {
+        this.sales_regions = data().deepCopy(fields()[10].schema(), other.sales_regions);
         fieldSetFlags()[10] = other.fieldSetFlags()[10];
       }
-      if (isValidValue(fields()[11], other.sales_country_150)) {
-        this.sales_country_150 = data().deepCopy(fields()[11].schema(), other.sales_country_150);
+      if (isValidValue(fields()[11], other.sales_countries_150)) {
+        this.sales_countries_150 = data().deepCopy(fields()[11].schema(), other.sales_countries_150);
         fieldSetFlags()[11] = other.fieldSetFlags()[11];
+      }
+      if (isValidValue(fields()[12], other.sales_countries_142)) {
+        this.sales_countries_142 = data().deepCopy(fields()[12].schema(), other.sales_countries_142);
+        fieldSetFlags()[12] = other.fieldSetFlags()[12];
+      }
+      if (isValidValue(fields()[13], other.sales_countries_021)) {
+        this.sales_countries_021 = data().deepCopy(fields()[13].schema(), other.sales_countries_021);
+        fieldSetFlags()[13] = other.fieldSetFlags()[13];
+      }
+      if (isValidValue(fields()[14], other.sales_countries_other)) {
+        this.sales_countries_other = data().deepCopy(fields()[14].schema(), other.sales_countries_other);
+        fieldSetFlags()[14] = other.fieldSetFlags()[14];
       }
     }
 
@@ -527,13 +621,25 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
         this.goals = data().deepCopy(fields()[9].schema(), other.goals);
         fieldSetFlags()[9] = true;
       }
-      if (isValidValue(fields()[10], other.sales_market_region)) {
-        this.sales_market_region = data().deepCopy(fields()[10].schema(), other.sales_market_region);
+      if (isValidValue(fields()[10], other.sales_regions)) {
+        this.sales_regions = data().deepCopy(fields()[10].schema(), other.sales_regions);
         fieldSetFlags()[10] = true;
       }
-      if (isValidValue(fields()[11], other.sales_country_150)) {
-        this.sales_country_150 = data().deepCopy(fields()[11].schema(), other.sales_country_150);
+      if (isValidValue(fields()[11], other.sales_countries_150)) {
+        this.sales_countries_150 = data().deepCopy(fields()[11].schema(), other.sales_countries_150);
         fieldSetFlags()[11] = true;
+      }
+      if (isValidValue(fields()[12], other.sales_countries_142)) {
+        this.sales_countries_142 = data().deepCopy(fields()[12].schema(), other.sales_countries_142);
+        fieldSetFlags()[12] = true;
+      }
+      if (isValidValue(fields()[13], other.sales_countries_021)) {
+        this.sales_countries_021 = data().deepCopy(fields()[13].schema(), other.sales_countries_021);
+        fieldSetFlags()[13] = true;
+      }
+      if (isValidValue(fields()[14], other.sales_countries_other)) {
+        this.sales_countries_other = data().deepCopy(fields()[14].schema(), other.sales_countries_other);
+        fieldSetFlags()[14] = true;
       }
     }
 
@@ -936,82 +1042,218 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
     }
 
     /**
-      * Gets the value of the 'sales_market_region' field.
+      * Gets the value of the 'sales_regions' field.
       * @return The value.
       */
-    public business.model.strategy.code getSalesMarketRegion() {
-      return sales_market_region;
+    public java.util.List<business.model.strategy.MarketRegionsEnum> getSalesRegions() {
+      return sales_regions;
     }
 
 
     /**
-      * Sets the value of the 'sales_market_region' field.
-      * @param value The value of 'sales_market_region'.
+      * Sets the value of the 'sales_regions' field.
+      * @param value The value of 'sales_regions'.
       * @return This builder.
       */
-    public business.model.strategy.BusinessModelStrategy.Builder setSalesMarketRegion(business.model.strategy.code value) {
+    public business.model.strategy.BusinessModelStrategy.Builder setSalesRegions(java.util.List<business.model.strategy.MarketRegionsEnum> value) {
       validate(fields()[10], value);
-      this.sales_market_region = value;
+      this.sales_regions = value;
       fieldSetFlags()[10] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'sales_market_region' field has been set.
-      * @return True if the 'sales_market_region' field has been set, false otherwise.
+      * Checks whether the 'sales_regions' field has been set.
+      * @return True if the 'sales_regions' field has been set, false otherwise.
       */
-    public boolean hasSalesMarketRegion() {
+    public boolean hasSalesRegions() {
       return fieldSetFlags()[10];
     }
 
 
     /**
-      * Clears the value of the 'sales_market_region' field.
+      * Clears the value of the 'sales_regions' field.
       * @return This builder.
       */
-    public business.model.strategy.BusinessModelStrategy.Builder clearSalesMarketRegion() {
-      sales_market_region = null;
+    public business.model.strategy.BusinessModelStrategy.Builder clearSalesRegions() {
+      sales_regions = null;
       fieldSetFlags()[10] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'sales_country_150' field.
+      * Gets the value of the 'sales_countries_150' field.
+      * Countries in Europe Region (ISO 3166-1 alpha-2)
       * @return The value.
       */
-    public java.util.List<java.lang.CharSequence> getSalesCountry150() {
-      return sales_country_150;
+    public java.util.List<java.lang.CharSequence> getSalesCountries150() {
+      return sales_countries_150;
     }
 
 
     /**
-      * Sets the value of the 'sales_country_150' field.
-      * @param value The value of 'sales_country_150'.
+      * Sets the value of the 'sales_countries_150' field.
+      * Countries in Europe Region (ISO 3166-1 alpha-2)
+      * @param value The value of 'sales_countries_150'.
       * @return This builder.
       */
-    public business.model.strategy.BusinessModelStrategy.Builder setSalesCountry150(java.util.List<java.lang.CharSequence> value) {
+    public business.model.strategy.BusinessModelStrategy.Builder setSalesCountries150(java.util.List<java.lang.CharSequence> value) {
       validate(fields()[11], value);
-      this.sales_country_150 = value;
+      this.sales_countries_150 = value;
       fieldSetFlags()[11] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'sales_country_150' field has been set.
-      * @return True if the 'sales_country_150' field has been set, false otherwise.
+      * Checks whether the 'sales_countries_150' field has been set.
+      * Countries in Europe Region (ISO 3166-1 alpha-2)
+      * @return True if the 'sales_countries_150' field has been set, false otherwise.
       */
-    public boolean hasSalesCountry150() {
+    public boolean hasSalesCountries150() {
       return fieldSetFlags()[11];
     }
 
 
     /**
-      * Clears the value of the 'sales_country_150' field.
+      * Clears the value of the 'sales_countries_150' field.
+      * Countries in Europe Region (ISO 3166-1 alpha-2)
       * @return This builder.
       */
-    public business.model.strategy.BusinessModelStrategy.Builder clearSalesCountry150() {
-      sales_country_150 = null;
+    public business.model.strategy.BusinessModelStrategy.Builder clearSalesCountries150() {
+      sales_countries_150 = null;
       fieldSetFlags()[11] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'sales_countries_142' field.
+      * Countries in Asia Region (M49 codes)
+      * @return The value.
+      */
+    public java.util.List<java.lang.CharSequence> getSalesCountries142() {
+      return sales_countries_142;
+    }
+
+
+    /**
+      * Sets the value of the 'sales_countries_142' field.
+      * Countries in Asia Region (M49 codes)
+      * @param value The value of 'sales_countries_142'.
+      * @return This builder.
+      */
+    public business.model.strategy.BusinessModelStrategy.Builder setSalesCountries142(java.util.List<java.lang.CharSequence> value) {
+      validate(fields()[12], value);
+      this.sales_countries_142 = value;
+      fieldSetFlags()[12] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'sales_countries_142' field has been set.
+      * Countries in Asia Region (M49 codes)
+      * @return True if the 'sales_countries_142' field has been set, false otherwise.
+      */
+    public boolean hasSalesCountries142() {
+      return fieldSetFlags()[12];
+    }
+
+
+    /**
+      * Clears the value of the 'sales_countries_142' field.
+      * Countries in Asia Region (M49 codes)
+      * @return This builder.
+      */
+    public business.model.strategy.BusinessModelStrategy.Builder clearSalesCountries142() {
+      sales_countries_142 = null;
+      fieldSetFlags()[12] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'sales_countries_021' field.
+      * Countries in North America Region (M49 codes)
+      * @return The value.
+      */
+    public java.util.List<java.lang.CharSequence> getSalesCountries021() {
+      return sales_countries_021;
+    }
+
+
+    /**
+      * Sets the value of the 'sales_countries_021' field.
+      * Countries in North America Region (M49 codes)
+      * @param value The value of 'sales_countries_021'.
+      * @return This builder.
+      */
+    public business.model.strategy.BusinessModelStrategy.Builder setSalesCountries021(java.util.List<java.lang.CharSequence> value) {
+      validate(fields()[13], value);
+      this.sales_countries_021 = value;
+      fieldSetFlags()[13] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'sales_countries_021' field has been set.
+      * Countries in North America Region (M49 codes)
+      * @return True if the 'sales_countries_021' field has been set, false otherwise.
+      */
+    public boolean hasSalesCountries021() {
+      return fieldSetFlags()[13];
+    }
+
+
+    /**
+      * Clears the value of the 'sales_countries_021' field.
+      * Countries in North America Region (M49 codes)
+      * @return This builder.
+      */
+    public business.model.strategy.BusinessModelStrategy.Builder clearSalesCountries021() {
+      sales_countries_021 = null;
+      fieldSetFlags()[13] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'sales_countries_other' field.
+      * Countries in Other Region (M49 codes)
+      * @return The value.
+      */
+    public java.util.List<java.lang.CharSequence> getSalesCountriesOther() {
+      return sales_countries_other;
+    }
+
+
+    /**
+      * Sets the value of the 'sales_countries_other' field.
+      * Countries in Other Region (M49 codes)
+      * @param value The value of 'sales_countries_other'.
+      * @return This builder.
+      */
+    public business.model.strategy.BusinessModelStrategy.Builder setSalesCountriesOther(java.util.List<java.lang.CharSequence> value) {
+      validate(fields()[14], value);
+      this.sales_countries_other = value;
+      fieldSetFlags()[14] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'sales_countries_other' field has been set.
+      * Countries in Other Region (M49 codes)
+      * @return True if the 'sales_countries_other' field has been set, false otherwise.
+      */
+    public boolean hasSalesCountriesOther() {
+      return fieldSetFlags()[14];
+    }
+
+
+    /**
+      * Clears the value of the 'sales_countries_other' field.
+      * Countries in Other Region (M49 codes)
+      * @return This builder.
+      */
+    public business.model.strategy.BusinessModelStrategy.Builder clearSalesCountriesOther() {
+      sales_countries_other = null;
+      fieldSetFlags()[14] = false;
       return this;
     }
 
@@ -1030,8 +1272,11 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
         record.capabilities = fieldSetFlags()[7] ? this.capabilities : (java.lang.CharSequence) defaultValue(fields()[7]);
         record.client_structure = fieldSetFlags()[8] ? this.client_structure : (java.lang.CharSequence) defaultValue(fields()[8]);
         record.goals = fieldSetFlags()[9] ? this.goals : (java.lang.CharSequence) defaultValue(fields()[9]);
-        record.sales_market_region = fieldSetFlags()[10] ? this.sales_market_region : (business.model.strategy.code) defaultValue(fields()[10]);
-        record.sales_country_150 = fieldSetFlags()[11] ? this.sales_country_150 : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[11]);
+        record.sales_regions = fieldSetFlags()[10] ? this.sales_regions : (java.util.List<business.model.strategy.MarketRegionsEnum>) defaultValue(fields()[10]);
+        record.sales_countries_150 = fieldSetFlags()[11] ? this.sales_countries_150 : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[11]);
+        record.sales_countries_142 = fieldSetFlags()[12] ? this.sales_countries_142 : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[12]);
+        record.sales_countries_021 = fieldSetFlags()[13] ? this.sales_countries_021 : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[13]);
+        record.sales_countries_other = fieldSetFlags()[14] ? this.sales_countries_other : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[14]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -1074,41 +1319,139 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
 
     out.writeString(this.partner_ipid);
 
-    out.writeString(this.drivers);
-
-    out.writeString(this.competencies);
-
-    out.writeString(this.capabilities);
-
-    out.writeString(this.client_structure);
-
-    out.writeString(this.goals);
-
-    if (this.sales_market_region == null) {
+    if (this.drivers == null) {
       out.writeIndex(0);
       out.writeNull();
     } else {
       out.writeIndex(1);
-      out.writeEnum(this.sales_market_region.ordinal());
+      out.writeString(this.drivers);
     }
 
-    if (this.sales_country_150 == null) {
+    if (this.competencies == null) {
       out.writeIndex(0);
       out.writeNull();
     } else {
       out.writeIndex(1);
-      long size0 = this.sales_country_150.size();
+      out.writeString(this.competencies);
+    }
+
+    if (this.capabilities == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.capabilities);
+    }
+
+    if (this.client_structure == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.client_structure);
+    }
+
+    if (this.goals == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.goals);
+    }
+
+    if (this.sales_regions == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      long size0 = this.sales_regions.size();
       out.writeArrayStart();
       out.setItemCount(size0);
       long actualSize0 = 0;
-      for (java.lang.CharSequence e0: this.sales_country_150) {
+      for (business.model.strategy.MarketRegionsEnum e0: this.sales_regions) {
         actualSize0++;
         out.startItem();
-        out.writeString(e0);
+        out.writeEnum(e0.ordinal());
       }
       out.writeArrayEnd();
       if (actualSize0 != size0)
         throw new java.util.ConcurrentModificationException("Array-size written was " + size0 + ", but element count was " + actualSize0 + ".");
+    }
+
+    if (this.sales_countries_150 == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      long size1 = this.sales_countries_150.size();
+      out.writeArrayStart();
+      out.setItemCount(size1);
+      long actualSize1 = 0;
+      for (java.lang.CharSequence e1: this.sales_countries_150) {
+        actualSize1++;
+        out.startItem();
+        out.writeString(e1);
+      }
+      out.writeArrayEnd();
+      if (actualSize1 != size1)
+        throw new java.util.ConcurrentModificationException("Array-size written was " + size1 + ", but element count was " + actualSize1 + ".");
+    }
+
+    if (this.sales_countries_142 == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      long size2 = this.sales_countries_142.size();
+      out.writeArrayStart();
+      out.setItemCount(size2);
+      long actualSize2 = 0;
+      for (java.lang.CharSequence e2: this.sales_countries_142) {
+        actualSize2++;
+        out.startItem();
+        out.writeString(e2);
+      }
+      out.writeArrayEnd();
+      if (actualSize2 != size2)
+        throw new java.util.ConcurrentModificationException("Array-size written was " + size2 + ", but element count was " + actualSize2 + ".");
+    }
+
+    if (this.sales_countries_021 == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      long size3 = this.sales_countries_021.size();
+      out.writeArrayStart();
+      out.setItemCount(size3);
+      long actualSize3 = 0;
+      for (java.lang.CharSequence e3: this.sales_countries_021) {
+        actualSize3++;
+        out.startItem();
+        out.writeString(e3);
+      }
+      out.writeArrayEnd();
+      if (actualSize3 != size3)
+        throw new java.util.ConcurrentModificationException("Array-size written was " + size3 + ", but element count was " + actualSize3 + ".");
+    }
+
+    if (this.sales_countries_other == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      long size4 = this.sales_countries_other.size();
+      out.writeArrayStart();
+      out.setItemCount(size4);
+      long actualSize4 = 0;
+      for (java.lang.CharSequence e4: this.sales_countries_other) {
+        actualSize4++;
+        out.startItem();
+        out.writeString(e4);
+      }
+      out.writeArrayEnd();
+      if (actualSize4 != size4)
+        throw new java.util.ConcurrentModificationException("Array-size written was " + size4 + ", but element count was " + actualSize4 + ".");
     }
 
   }
@@ -1128,45 +1471,143 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
 
       this.partner_ipid = in.readString(this.partner_ipid instanceof Utf8 ? (Utf8)this.partner_ipid : null);
 
-      this.drivers = in.readString(this.drivers instanceof Utf8 ? (Utf8)this.drivers : null);
-
-      this.competencies = in.readString(this.competencies instanceof Utf8 ? (Utf8)this.competencies : null);
-
-      this.capabilities = in.readString(this.capabilities instanceof Utf8 ? (Utf8)this.capabilities : null);
-
-      this.client_structure = in.readString(this.client_structure instanceof Utf8 ? (Utf8)this.client_structure : null);
-
-      this.goals = in.readString(this.goals instanceof Utf8 ? (Utf8)this.goals : null);
-
       if (in.readIndex() != 1) {
         in.readNull();
-        this.sales_market_region = null;
+        this.drivers = null;
       } else {
-        this.sales_market_region = business.model.strategy.code.values()[in.readEnum()];
+        this.drivers = in.readString(this.drivers instanceof Utf8 ? (Utf8)this.drivers : null);
       }
 
       if (in.readIndex() != 1) {
         in.readNull();
-        this.sales_country_150 = null;
+        this.competencies = null;
+      } else {
+        this.competencies = in.readString(this.competencies instanceof Utf8 ? (Utf8)this.competencies : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.capabilities = null;
+      } else {
+        this.capabilities = in.readString(this.capabilities instanceof Utf8 ? (Utf8)this.capabilities : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.client_structure = null;
+      } else {
+        this.client_structure = in.readString(this.client_structure instanceof Utf8 ? (Utf8)this.client_structure : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.goals = null;
+      } else {
+        this.goals = in.readString(this.goals instanceof Utf8 ? (Utf8)this.goals : null);
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.sales_regions = null;
       } else {
         long size0 = in.readArrayStart();
-        java.util.List<java.lang.CharSequence> a0 = this.sales_country_150;
+        java.util.List<business.model.strategy.MarketRegionsEnum> a0 = this.sales_regions;
         if (a0 == null) {
-          a0 = new SpecificData.Array<java.lang.CharSequence>((int)size0, SCHEMA$.getField("sales_country_150").schema().getTypes().get(1));
-          this.sales_country_150 = a0;
+          a0 = new SpecificData.Array<business.model.strategy.MarketRegionsEnum>((int)size0, SCHEMA$.getField("sales_regions").schema().getTypes().get(1));
+          this.sales_regions = a0;
         } else a0.clear();
-        SpecificData.Array<java.lang.CharSequence> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a0 : null);
+        SpecificData.Array<business.model.strategy.MarketRegionsEnum> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<business.model.strategy.MarketRegionsEnum>)a0 : null);
         for ( ; 0 < size0; size0 = in.arrayNext()) {
           for ( ; size0 != 0; size0--) {
-            java.lang.CharSequence e0 = (ga0 != null ? ga0.peek() : null);
-            e0 = in.readString(e0 instanceof Utf8 ? (Utf8)e0 : null);
+            business.model.strategy.MarketRegionsEnum e0 = (ga0 != null ? ga0.peek() : null);
+            e0 = business.model.strategy.MarketRegionsEnum.values()[in.readEnum()];
             a0.add(e0);
           }
         }
       }
 
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.sales_countries_150 = null;
+      } else {
+        long size1 = in.readArrayStart();
+        java.util.List<java.lang.CharSequence> a1 = this.sales_countries_150;
+        if (a1 == null) {
+          a1 = new SpecificData.Array<java.lang.CharSequence>((int)size1, SCHEMA$.getField("sales_countries_150").schema().getTypes().get(1));
+          this.sales_countries_150 = a1;
+        } else a1.clear();
+        SpecificData.Array<java.lang.CharSequence> ga1 = (a1 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a1 : null);
+        for ( ; 0 < size1; size1 = in.arrayNext()) {
+          for ( ; size1 != 0; size1--) {
+            java.lang.CharSequence e1 = (ga1 != null ? ga1.peek() : null);
+            e1 = in.readString(e1 instanceof Utf8 ? (Utf8)e1 : null);
+            a1.add(e1);
+          }
+        }
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.sales_countries_142 = null;
+      } else {
+        long size2 = in.readArrayStart();
+        java.util.List<java.lang.CharSequence> a2 = this.sales_countries_142;
+        if (a2 == null) {
+          a2 = new SpecificData.Array<java.lang.CharSequence>((int)size2, SCHEMA$.getField("sales_countries_142").schema().getTypes().get(1));
+          this.sales_countries_142 = a2;
+        } else a2.clear();
+        SpecificData.Array<java.lang.CharSequence> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a2 : null);
+        for ( ; 0 < size2; size2 = in.arrayNext()) {
+          for ( ; size2 != 0; size2--) {
+            java.lang.CharSequence e2 = (ga2 != null ? ga2.peek() : null);
+            e2 = in.readString(e2 instanceof Utf8 ? (Utf8)e2 : null);
+            a2.add(e2);
+          }
+        }
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.sales_countries_021 = null;
+      } else {
+        long size3 = in.readArrayStart();
+        java.util.List<java.lang.CharSequence> a3 = this.sales_countries_021;
+        if (a3 == null) {
+          a3 = new SpecificData.Array<java.lang.CharSequence>((int)size3, SCHEMA$.getField("sales_countries_021").schema().getTypes().get(1));
+          this.sales_countries_021 = a3;
+        } else a3.clear();
+        SpecificData.Array<java.lang.CharSequence> ga3 = (a3 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a3 : null);
+        for ( ; 0 < size3; size3 = in.arrayNext()) {
+          for ( ; size3 != 0; size3--) {
+            java.lang.CharSequence e3 = (ga3 != null ? ga3.peek() : null);
+            e3 = in.readString(e3 instanceof Utf8 ? (Utf8)e3 : null);
+            a3.add(e3);
+          }
+        }
+      }
+
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.sales_countries_other = null;
+      } else {
+        long size4 = in.readArrayStart();
+        java.util.List<java.lang.CharSequence> a4 = this.sales_countries_other;
+        if (a4 == null) {
+          a4 = new SpecificData.Array<java.lang.CharSequence>((int)size4, SCHEMA$.getField("sales_countries_other").schema().getTypes().get(1));
+          this.sales_countries_other = a4;
+        } else a4.clear();
+        SpecificData.Array<java.lang.CharSequence> ga4 = (a4 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a4 : null);
+        for ( ; 0 < size4; size4 = in.arrayNext()) {
+          for ( ; size4 != 0; size4--) {
+            java.lang.CharSequence e4 = (ga4 != null ? ga4.peek() : null);
+            e4 = in.readString(e4 instanceof Utf8 ? (Utf8)e4 : null);
+            a4.add(e4);
+          }
+        }
+      }
+
     } else {
-      for (int i = 0; i < 12; i++) {
+      for (int i = 0; i < 15; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.avro_fingerprint = in.readLong();
@@ -1189,51 +1630,155 @@ public class BusinessModelStrategy extends org.apache.avro.specific.SpecificReco
           break;
 
         case 5:
-          this.drivers = in.readString(this.drivers instanceof Utf8 ? (Utf8)this.drivers : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.drivers = null;
+          } else {
+            this.drivers = in.readString(this.drivers instanceof Utf8 ? (Utf8)this.drivers : null);
+          }
           break;
 
         case 6:
-          this.competencies = in.readString(this.competencies instanceof Utf8 ? (Utf8)this.competencies : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.competencies = null;
+          } else {
+            this.competencies = in.readString(this.competencies instanceof Utf8 ? (Utf8)this.competencies : null);
+          }
           break;
 
         case 7:
-          this.capabilities = in.readString(this.capabilities instanceof Utf8 ? (Utf8)this.capabilities : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.capabilities = null;
+          } else {
+            this.capabilities = in.readString(this.capabilities instanceof Utf8 ? (Utf8)this.capabilities : null);
+          }
           break;
 
         case 8:
-          this.client_structure = in.readString(this.client_structure instanceof Utf8 ? (Utf8)this.client_structure : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.client_structure = null;
+          } else {
+            this.client_structure = in.readString(this.client_structure instanceof Utf8 ? (Utf8)this.client_structure : null);
+          }
           break;
 
         case 9:
-          this.goals = in.readString(this.goals instanceof Utf8 ? (Utf8)this.goals : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.goals = null;
+          } else {
+            this.goals = in.readString(this.goals instanceof Utf8 ? (Utf8)this.goals : null);
+          }
           break;
 
         case 10:
           if (in.readIndex() != 1) {
             in.readNull();
-            this.sales_market_region = null;
+            this.sales_regions = null;
           } else {
-            this.sales_market_region = business.model.strategy.code.values()[in.readEnum()];
+            long size0 = in.readArrayStart();
+            java.util.List<business.model.strategy.MarketRegionsEnum> a0 = this.sales_regions;
+            if (a0 == null) {
+              a0 = new SpecificData.Array<business.model.strategy.MarketRegionsEnum>((int)size0, SCHEMA$.getField("sales_regions").schema().getTypes().get(1));
+              this.sales_regions = a0;
+            } else a0.clear();
+            SpecificData.Array<business.model.strategy.MarketRegionsEnum> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<business.model.strategy.MarketRegionsEnum>)a0 : null);
+            for ( ; 0 < size0; size0 = in.arrayNext()) {
+              for ( ; size0 != 0; size0--) {
+                business.model.strategy.MarketRegionsEnum e0 = (ga0 != null ? ga0.peek() : null);
+                e0 = business.model.strategy.MarketRegionsEnum.values()[in.readEnum()];
+                a0.add(e0);
+              }
+            }
           }
           break;
 
         case 11:
           if (in.readIndex() != 1) {
             in.readNull();
-            this.sales_country_150 = null;
+            this.sales_countries_150 = null;
           } else {
-            long size0 = in.readArrayStart();
-            java.util.List<java.lang.CharSequence> a0 = this.sales_country_150;
-            if (a0 == null) {
-              a0 = new SpecificData.Array<java.lang.CharSequence>((int)size0, SCHEMA$.getField("sales_country_150").schema().getTypes().get(1));
-              this.sales_country_150 = a0;
-            } else a0.clear();
-            SpecificData.Array<java.lang.CharSequence> ga0 = (a0 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a0 : null);
-            for ( ; 0 < size0; size0 = in.arrayNext()) {
-              for ( ; size0 != 0; size0--) {
-                java.lang.CharSequence e0 = (ga0 != null ? ga0.peek() : null);
-                e0 = in.readString(e0 instanceof Utf8 ? (Utf8)e0 : null);
-                a0.add(e0);
+            long size1 = in.readArrayStart();
+            java.util.List<java.lang.CharSequence> a1 = this.sales_countries_150;
+            if (a1 == null) {
+              a1 = new SpecificData.Array<java.lang.CharSequence>((int)size1, SCHEMA$.getField("sales_countries_150").schema().getTypes().get(1));
+              this.sales_countries_150 = a1;
+            } else a1.clear();
+            SpecificData.Array<java.lang.CharSequence> ga1 = (a1 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a1 : null);
+            for ( ; 0 < size1; size1 = in.arrayNext()) {
+              for ( ; size1 != 0; size1--) {
+                java.lang.CharSequence e1 = (ga1 != null ? ga1.peek() : null);
+                e1 = in.readString(e1 instanceof Utf8 ? (Utf8)e1 : null);
+                a1.add(e1);
+              }
+            }
+          }
+          break;
+
+        case 12:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.sales_countries_142 = null;
+          } else {
+            long size2 = in.readArrayStart();
+            java.util.List<java.lang.CharSequence> a2 = this.sales_countries_142;
+            if (a2 == null) {
+              a2 = new SpecificData.Array<java.lang.CharSequence>((int)size2, SCHEMA$.getField("sales_countries_142").schema().getTypes().get(1));
+              this.sales_countries_142 = a2;
+            } else a2.clear();
+            SpecificData.Array<java.lang.CharSequence> ga2 = (a2 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a2 : null);
+            for ( ; 0 < size2; size2 = in.arrayNext()) {
+              for ( ; size2 != 0; size2--) {
+                java.lang.CharSequence e2 = (ga2 != null ? ga2.peek() : null);
+                e2 = in.readString(e2 instanceof Utf8 ? (Utf8)e2 : null);
+                a2.add(e2);
+              }
+            }
+          }
+          break;
+
+        case 13:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.sales_countries_021 = null;
+          } else {
+            long size3 = in.readArrayStart();
+            java.util.List<java.lang.CharSequence> a3 = this.sales_countries_021;
+            if (a3 == null) {
+              a3 = new SpecificData.Array<java.lang.CharSequence>((int)size3, SCHEMA$.getField("sales_countries_021").schema().getTypes().get(1));
+              this.sales_countries_021 = a3;
+            } else a3.clear();
+            SpecificData.Array<java.lang.CharSequence> ga3 = (a3 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a3 : null);
+            for ( ; 0 < size3; size3 = in.arrayNext()) {
+              for ( ; size3 != 0; size3--) {
+                java.lang.CharSequence e3 = (ga3 != null ? ga3.peek() : null);
+                e3 = in.readString(e3 instanceof Utf8 ? (Utf8)e3 : null);
+                a3.add(e3);
+              }
+            }
+          }
+          break;
+
+        case 14:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.sales_countries_other = null;
+          } else {
+            long size4 = in.readArrayStart();
+            java.util.List<java.lang.CharSequence> a4 = this.sales_countries_other;
+            if (a4 == null) {
+              a4 = new SpecificData.Array<java.lang.CharSequence>((int)size4, SCHEMA$.getField("sales_countries_other").schema().getTypes().get(1));
+              this.sales_countries_other = a4;
+            } else a4.clear();
+            SpecificData.Array<java.lang.CharSequence> ga4 = (a4 instanceof SpecificData.Array ? (SpecificData.Array<java.lang.CharSequence>)a4 : null);
+            for ( ; 0 < size4; size4 = in.arrayNext()) {
+              for ( ; size4 != 0; size4--) {
+                java.lang.CharSequence e4 = (ga4 != null ? ga4.peek() : null);
+                e4 = in.readString(e4 instanceof Utf8 ? (Utf8)e4 : null);
+                a4.add(e4);
               }
             }
           }

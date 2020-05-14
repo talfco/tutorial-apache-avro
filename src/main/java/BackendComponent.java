@@ -1,6 +1,10 @@
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestResult;
+import io.searchbox.core.Index;
+import net.cloudburo.avro.registry.ElasticSearchSchemaRegistry;
 import net.cloudburo.avro.registry.SchemaRegistry;
 import net.cloudburo.avro.registry.SchemaRegistryFactory;
-import net.cloudburo.elasticsearch.JestDemoApplication;
+import net.cloudburo.elasticsearch.ESPersistencyManager;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericDatumWriter;
@@ -13,17 +17,36 @@ import java.nio.ByteBuffer;
 
 import org.apache.log4j.Logger;
 
-public class Receiver {
+public class BackendComponent {
 
-    private static Logger logger = Logger.getLogger(Receiver.class);
+    private static BackendComponent backendComponent;
+    private ESPersistencyManager esPersistencyManager;
 
-    public static String receive (byte[] msg) throws IOException {
+    public static BackendComponent createSingleton(ESPersistencyManager esm){
+        if (backendComponent == null) {
+            backendComponent = new BackendComponent();
+        }
+        backendComponent.esPersistencyManager = esm;
+        return backendComponent;
+    }
+
+    private static Logger logger = Logger.getLogger(BackendComponent.class);
+
+    /**
+     * Persist the single object encoded Avor Binary Message as a JSON Avro Message
+     * @param msg
+     * @return The JSON Avor essage
+     * @throws IOException
+     */
+    public  String persist(byte[] msg, String index, String type, String id) throws IOException {
         if (checkForAvroSingleObjectEncoding(msg)) {
             long fingerprint = getAvroFingerprint(msg);
-            SchemaRegistry registry = SchemaRegistryFactory.getSchemaRegistry(SchemaRegistryFactory.registryFileBased);
+            ElasticSearchSchemaRegistry registry = (ElasticSearchSchemaRegistry)SchemaRegistryFactory.getSchemaRegistry(SchemaRegistryFactory.registryElasticSearchBased);
+            registry.setESPersistencyManager(esPersistencyManager);
             Schema schema = registry.getSchema(fingerprint);
             byte[] payload = extractPayload(msg);
             String jsonDoc = convertAvroBinaryToJSON(payload,schema);
+            esPersistencyManager.createUpdateDocument(index,type,jsonDoc,id);
             return jsonDoc;
         }
         else {
@@ -32,11 +55,11 @@ public class Receiver {
         }
     }
 
-    private static boolean checkForAvroSingleObjectEncoding(byte[] msg) {
+    private  boolean checkForAvroSingleObjectEncoding(byte[] msg) {
         return (msg[0] == (byte)0xc0 && msg[1] == (byte)0x01);
     }
 
-    private static long getAvroFingerprint(byte[] msg) {
+    private  long getAvroFingerprint(byte[] msg) {
         byte[] fp = new byte[Long.BYTES];
         System.arraycopy(msg,2,fp,0,Long.BYTES);
         ByteBuffer byteBuffer = ByteBuffer.wrap(fp);
@@ -44,13 +67,13 @@ public class Receiver {
         return fpstr;
     }
 
-    private static byte[] extractPayload(byte[] msg) {
+    private  byte[] extractPayload(byte[] msg) {
         byte[] pl = new byte[msg.length-2-Long.BYTES];
         System.arraycopy(msg,10,pl,0,msg.length-2-Long.BYTES);
         return pl;
     }
 
-    private static String convertAvroBinaryToJSON(byte[] msg, Schema schema)
+    private  String convertAvroBinaryToJSON(byte[] msg, Schema schema)
             throws IOException {
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -70,4 +93,5 @@ public class Receiver {
         outputStream.flush();
         return outputStream.toString();
     }
+
 }

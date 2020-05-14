@@ -1,3 +1,5 @@
+import business.model.strategy.BusinessModelStrategy;
+import business.model.strategy.MarketRegionsEnum;
 import example.avro.User;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
@@ -8,6 +10,8 @@ import org.apache.avro.specific.SpecificDatumWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class TestLoader {
@@ -73,16 +77,25 @@ public class TestLoader {
         }
     }
 
-    public static User getUser() {
-        return User.newBuilder()
+    public static BusinessModelStrategy getBusinessModelStrategy() {
+        // Sales Marketing Regions
+        List<MarketRegionsEnum> regions = new ArrayList<>();
+        regions.add(MarketRegionsEnum.M49_021);
+        regions.add(MarketRegionsEnum.M49_756);
+        // Sales Countries
+        List<java.lang.CharSequence> countries_021 = new ArrayList<>();
+        countries_021.add("840"); // USA
+        countries_021.add("021"); // Canada
+        return BusinessModelStrategy.newBuilder()
                 .setAvroFingerprint(0)
-                .setIndexIpid(UUID.randomUUID().toString())
-                .setLastUpdateTimestamp( java.lang.System.currentTimeMillis())
-                .setLastUpdateLoginid("111114444")
+                .setIndexIpid("0")
+                .setLastUpdateTimestamp(0)
+                .setLastUpdateLoginid("")
                 .setPartnerIpid(UUID.randomUUID().toString())
-                .setName("Alice")
-                .setFavoriteColor("red")
-                .setFavoriteNumber(null)
+                .setClientStructure("Approaching the high net worth client segment")
+                .setDrivers("Fintecs")
+                .setSalesRegions(regions)
+                .setSalesCountries021(countries_021)
                 .build();
     }
 }
