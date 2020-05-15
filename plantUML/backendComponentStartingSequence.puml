@@ -1,0 +1,46 @@
+@startuml
+participant BackendComponent order 10 #coral
+participant ESPersistencyManager order 20
+participant SchemaRegistryFactory order 30
+participant ESSchemaRegistry order 40
+database ElasticSearchCluster order 100  #coral
+
+title "BackendComponent Starting Sequence"
+footer "Avro-ElasticSerach Tutorial"
+
+autonumber 1
+BackendComponent -> ESPersistencyManager: createSingleton(esLoginData)
+ESPersistencyManager -> ElasticSearchCluster: conntect(esLoginData)
+autonumber 10
+BackendComponent -> ESPersistencyManager: createIndex("businessModel","avroSchema")
+ESPersistencyManager -> ElasticSearchCluster: createIndex("businessModel","avroSchema")
+autonumber 20
+BackendComponent ->BackendComponent: loadFile("resources/es-mappping.json"): JsonDoc
+autonumber 30
+BackendComponent -> ESPersistencyManager: updateESMapping(jsonDoc)
+ESPersistencyManager -> ElasticSearchCluster: updateMapping(jsonDoc)
+autonumber 40
+BackendComponent -> BackendComponent: avroParser("avro/businessModel-stratey.asvc"): strategy-schema
+note left
+The avroSchema Json file is the
+interface contract of our
+ElasticSearch documents. In our
+example the businessModel-strategy
+JSON document
+end note
+autonumber 50
+BackendComponent -> SchemaRegistryFactory: getSchemaRegistry("elasticSearchBased")
+SchemaRegistryFactory -> ESSchemaRegistry: initialize()
+ESSchemaRegistry --> BackendComponent
+autonumber 60
+BackendComponent -> ESSchemaRegistry: registerSchema(strategy-schema)
+ESSchemaRegistry -> ESSchemaRegistry: generateFingerprint(strategy-schema)
+ESSchemaRegistry -> ESPersistencyManager: checkAndCreateDoc(fingerprint, schemaAsJson)
+ESPersistencyManager -> ElasticSearchCluster: createDoc("avroSchema", fingerprint, schemaAsJson
+ESSchemaRegistry --> BackendComponent: fingerprint as long
+note left
+ Schema Fingerprint is key for
+ data payload interface contract
+ negotiation with FrontendComponent
+end note
+@enduml
