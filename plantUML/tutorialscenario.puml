@@ -1,0 +1,11 @@
+@startuml
+title "Tutorial Scenario"
+footer "Avro-ElasticSerach Tutorial"
+actor endUser
+autonumber
+endUser -> ReactUI: enterData
+endUser -> ReactUI: clickOk
+ReactUI -> ServiceComponent: put /model/strategy(localizedJSONData)
+ServiceComponent -> BackendComponent: put /persist(avroMessageBinary)
+BackendComponent -> ElasticSearchCluser: put /businessmodel/strategy(avroMessageJSON)
+@enduml

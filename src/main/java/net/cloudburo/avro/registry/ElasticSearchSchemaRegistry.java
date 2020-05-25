@@ -1,6 +1,5 @@
 package net.cloudburo.avro.registry;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.cloudburo.elasticsearch.ESPersistencyManager;
 import org.apache.avro.Schema;

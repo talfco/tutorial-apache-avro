@@ -2,7 +2,6 @@ package net.cloudburo.avro.registry;
 
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaNormalization;
-
 import java.io.IOException;
 
 

@@ -69,10 +69,6 @@ public class ESPersistencyManager {
         }
     }
 
-    public String readDocumentById(String index,String id) throws IOException{
-        return esClient.execute(new Get.Builder(index, id).build()).getJsonString();
-    }
-
     public JsonObject readDocumentByIdAsObject(String index, String id) throws IOException{
         return esClient.execute(new Get.Builder(index, id).build()).getJsonObject();
     }
