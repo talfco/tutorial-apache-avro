@@ -12,8 +12,11 @@ import org.apache.avro.io.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
 
@@ -21,13 +24,30 @@ public class BackendComponent {
 
     private static BackendComponent backendComponent;
     private ESPersistencyManager esPersistencyManager;
+    private SchemaRegistry registry;
+    private long avroSchemaFingerprint;
 
-    public static BackendComponent createSingleton(ESPersistencyManager esm){
+    public static BackendComponent createSingleton(ESPersistencyManager esm, SchemaRegistry registry) throws IOException {
         if (backendComponent == null) {
-            backendComponent = new BackendComponent();
+            backendComponent = new BackendComponent(esm, registry);
         }
-        backendComponent.esPersistencyManager = esm;
         return backendComponent;
+    }
+
+    public BackendComponent(ESPersistencyManager esm, SchemaRegistry registry) throws IOException {
+        this.registry = registry;
+        this.esPersistencyManager = esm;
+        if (!esPersistencyManager.existsIndex("businessmodel")) {
+            esPersistencyManager.createIndex("businessmodel");
+        }
+        if (!esPersistencyManager.existsIndex("avroschema")) {
+            esPersistencyManager.createIndex("avroschema");
+        }
+        String mappings = new String ( Files.readAllBytes( Paths.get("src/main/resources/mappings-avro-index.json") ) );
+        esPersistencyManager.updateESMapping("avroschema","schema",mappings);
+        // Fetch the fingerprint UID of the used schema, if doesn't exists yet, it will be newly registered
+        Schema schema = new Schema.Parser().parse(new File("src/main/avro/businessModel-strategy.avsc"));
+        this.avroSchemaFingerprint = registry.registerSchema(schema);
     }
 
     private static Logger logger = Logger.getLogger(BackendComponent.class);
@@ -40,10 +60,8 @@ public class BackendComponent {
      */
     public  String persist(byte[] msg, String index, String type, String id) throws IOException {
         if (checkForAvroSingleObjectEncoding(msg)) {
-            long fingerprint = getAvroFingerprint(msg);
-            ElasticSearchSchemaRegistry registry = (ElasticSearchSchemaRegistry)SchemaRegistryFactory.getSchemaRegistry(SchemaRegistryFactory.registryElasticSearchBased);
-            registry.setESPersistencyManager(esPersistencyManager);
-            Schema schema = registry.getSchema(fingerprint);
+            long msgFingerprint = getAvroFingerprint(msg);
+            Schema schema = registry.getSchema(msgFingerprint);
             byte[] payload = extractPayload(msg);
             String jsonDoc = convertAvroBinaryToJSON(payload,schema);
             esPersistencyManager.createUpdateDocument(index,type,jsonDoc,id);

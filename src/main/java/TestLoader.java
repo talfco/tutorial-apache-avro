@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class TestLoader {
 
-
+    // The testloader uses the Avro generated Java Binding Classes
     public static BusinessModelStrategy getBusinessModelStrategy() {
         // Sales Marketing Regions
         List<MarketRegionsEnum> regions = new ArrayList<>();
