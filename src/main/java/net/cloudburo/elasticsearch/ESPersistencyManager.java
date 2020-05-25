@@ -62,7 +62,7 @@ public class ESPersistencyManager {
         }
         JestResult jestResult =  esClient.execute(esIndex);
         if(jestResult.isSucceeded()) {
-            logger.info("Document persisted");
+            logger.info("Document persisted:" +index+"/"+type+"/"+id);
         }
         else {
             logger.error(jestResult);

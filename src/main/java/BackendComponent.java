@@ -1,9 +1,4 @@
-import io.searchbox.client.JestClient;
-import io.searchbox.client.JestResult;
-import io.searchbox.core.Index;
-import net.cloudburo.avro.registry.ElasticSearchSchemaRegistry;
 import net.cloudburo.avro.registry.SchemaRegistry;
-import net.cloudburo.avro.registry.SchemaRegistryFactory;
 import net.cloudburo.elasticsearch.ESPersistencyManager;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericDatumReader;
@@ -25,7 +20,8 @@ public class BackendComponent {
     private static BackendComponent backendComponent;
     private ESPersistencyManager esPersistencyManager;
     private SchemaRegistry registry;
-    private long avroSchemaFingerprint;
+    private Schema backendComponentSchema;
+    private long backendComponentSchemaFingerprint;
 
     public static BackendComponent createSingleton(ESPersistencyManager esm, SchemaRegistry registry) throws IOException {
         if (backendComponent == null) {
@@ -46,8 +42,8 @@ public class BackendComponent {
         String mappings = new String ( Files.readAllBytes( Paths.get("src/main/resources/mappings-avro-index.json") ) );
         esPersistencyManager.updateESMapping("avroschema","schema",mappings);
         // Fetch the fingerprint UID of the used schema, if doesn't exists yet, it will be newly registered
-        Schema schema = new Schema.Parser().parse(new File("src/main/avro/businessModel-strategy.avsc"));
-        this.avroSchemaFingerprint = registry.registerSchema(schema);
+        backendComponentSchema = new Schema.Parser().parse(new File("src/main/avro/businessModel-strategy.avsc"));
+        this.backendComponentSchemaFingerprint = registry.registerSchema(backendComponentSchema);
     }
 
     private static Logger logger = Logger.getLogger(BackendComponent.class);
@@ -60,10 +56,7 @@ public class BackendComponent {
      */
     public  String persist(byte[] msg, String index, String type, String id) throws IOException {
         if (checkForAvroSingleObjectEncoding(msg)) {
-            long msgFingerprint = getAvroFingerprint(msg);
-            Schema schema = registry.getSchema(msgFingerprint);
-            byte[] payload = extractPayload(msg);
-            String jsonDoc = convertAvroBinaryToJSON(payload,schema);
+            String jsonDoc = convertAvroBinaryToJSON(msg);
             esPersistencyManager.createUpdateDocument(index,type,jsonDoc,id);
             return jsonDoc;
         }
@@ -91,17 +84,30 @@ public class BackendComponent {
         return pl;
     }
 
-    private  String convertAvroBinaryToJSON(byte[] msg, Schema schema)
+    private  String convertAvroBinaryToJSON(byte[] msg)
             throws IOException {
+        // We retrieve the fingerprint of the message
+
+        long msgFingerprint = getAvroFingerprint(msg);
+        // Now we retrieve the Schema via our registry
+        Schema mgsSchema = registry.getSchema(msgFingerprint);
+        byte[] payload = extractPayload(msg);
+        // Here comes the magic of Schema Evolution
+        // We are checking if received fingerprint is the same of our backend component
+        // If not, we pass in both Schemas to the GenericDatumReader which transform
+        // the message to our
+        DatumReader<Object> reader = null;
+        if (msgFingerprint == this.backendComponentSchemaFingerprint)
+            reader = new GenericDatumReader<>(mgsSchema);
+        else
+            reader = new GenericDatumReader<>(mgsSchema,this.backendComponentSchema);
+
+        DatumWriter<Object> writer = new GenericDatumWriter<>(mgsSchema);
+
+        BinaryDecoder binaryDecoder = DecoderFactory.get().binaryDecoder(new ByteArrayInputStream(payload), null);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        DatumReader<Object> reader = new GenericDatumReader<>(schema);
-        DatumWriter<Object> writer = new GenericDatumWriter<>(schema);
-
-        BinaryDecoder binaryDecoder = DecoderFactory.get().binaryDecoder(new ByteArrayInputStream(msg), null);
-
-        JsonEncoder jsonEncoder = EncoderFactory.get().jsonEncoder(schema, outputStream, true);
+        JsonEncoder jsonEncoder = EncoderFactory.get().jsonEncoder(mgsSchema, outputStream, true);
         Object datum = null;
         while (!binaryDecoder.isEnd()) {
             datum = reader.read(datum, binaryDecoder);

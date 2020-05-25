@@ -13,9 +13,9 @@ public class ServiceComponent {
 
     private static ServiceComponent serviceComponent;
     private ESPersistencyManager esPersistencyManager;
-    private SchemaRegistry registry;
-    private Schema schema;
-    private long avroSchemaFingerprint;
+    private SchemaRegistry schemaRegistry;
+    private Schema serviceComponentSchema;
+    private long serviceComponentFingerprint;
 
     public static ServiceComponent createSingleton(ESPersistencyManager esm, SchemaRegistry registry) throws IOException {
         if (serviceComponent == null) {
@@ -26,9 +26,9 @@ public class ServiceComponent {
 
     public ServiceComponent(ESPersistencyManager esm, SchemaRegistry registry) throws IOException {
         this.esPersistencyManager = esm;
-        this.registry = registry;
-        this.schema = new Schema.Parser().parse(new File("src/main/avro/businessModel-strategy.avsc"));
-        this.avroSchemaFingerprint = registry.registerSchema(schema);
+        this.schemaRegistry = registry;
+        this.serviceComponentSchema = new Schema.Parser().parse(new File("src/main/avro/businessModel-strategy.avsc"));
+        this.serviceComponentFingerprint = registry.registerSchema(serviceComponentSchema);
     }
 
     public byte[] processInputData(BusinessModelStrategy strategy) throws IOException {
@@ -38,7 +38,7 @@ public class ServiceComponent {
 
         // Each DAO has an attribute 'fingerprint' which stores the unique schema fingerprint.
         // It can be used to fetch at any time the corresponding schema, i.e. the DAO is fully self describing!
-        strategy.setAvroFingerprint(avroSchemaFingerprint);
+        strategy.setAvroFingerprint(serviceComponentFingerprint);
         // Each DAO has an attribute 'indexIpid' which will be set with a UID according to our rule
         // This id will be used by ElasticSearch as the unique primary identitfier (_id attribute)
         String id  = "80008000"+ UUID.randomUUID().toString();
@@ -49,8 +49,7 @@ public class ServiceComponent {
         strategy.setLastUpdateTimestamp(java.lang.System.currentTimeMillis());
         // Now we create from the DAO a single object encoding binary Avro message
         // This is a compact and fast format, which has the Avor schema fingerprint sealed in
-        return AvroMessageUtility.createSingleObjectEncodingAvroMessage(schema, strategy);
-
+        return AvroMessageUtility.createSingleObjectEncodingAvroMessage(serviceComponentSchema, strategy);
     }
 
 }
