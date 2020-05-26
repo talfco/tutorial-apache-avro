@@ -8,31 +8,17 @@ database ElasticSearchCluster order 100  #coral
 title "ServiceComponent Starting Sequence"
 footer "Avro-ElasticSerach Tutorial"
 
-autonumber 1
-ServiceComponent -> ESPersistencyManager: createSingleton(esLoginData)
-ESPersistencyManager -> ElasticSearchCluster: conntect(esLoginData)
 autonumber 10
-ServiceComponent -> ServiceComponent: avroParser("avro/businessModel-stratey.asvc"): strategy-schema
-note left
-The avroSchema Json file is the
-interface contract of our
-ElasticSearch documents. In our
-example the businessModel-strategy
-JSON document
-end note
+ServiceComponent -> ESPersistencyManager: createSingleton(esLoginData)
+ESPersistencyManager -> ElasticSearchCluster: connect(esLoginData)
+
 autonumber 20
 ServiceComponent -> SchemaRegistryFactory: getSchemaRegistry("elasticSearchBased")
 SchemaRegistryFactory -> ESSchemaRegistry: initialize()
-ESSchemaRegistry --> ServiceComponent
+ServiceComponent -> ESSchemaRegistry: setPersistencyManager(esPerManager)
+
 autonumber 30
-ServiceComponent -> ESSchemaRegistry: registerSchema(strategy-schema)
-ESSchemaRegistry -> ESSchemaRegistry: generateFingerprint(strategy-schema)
-ESSchemaRegistry -> ESPersistencyManager: checkAndCreateDoc(fingerprint, schemaAsJson)
-ESPersistencyManager -> ElasticSearchCluster: createDoc("avroSchema", fingerprint, schemaAsJson
-ESSchemaRegistry --> ServiceComponent: fingerprint as long
-note left
- Schema Fingerprint is key for
- data payload interface contract
- negotiation with BackendComponent
-end note
+ServiceComponent -> ESSchemaRegistry: getSchema(fingerprint): strategy-schema
+ESSchemaRegistry -> ElasticSearchCluster: /get/avroschema/fingerprint
+
 @enduml

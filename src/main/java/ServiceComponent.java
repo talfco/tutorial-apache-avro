@@ -4,8 +4,6 @@ import net.cloudburo.avro.registry.SchemaRegistry;
 import net.cloudburo.elasticsearch.ESPersistencyManager;
 import org.apache.avro.Schema;
 
-
-import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -17,17 +15,18 @@ public class ServiceComponent {
     private Schema serviceComponentSchema;
     private long serviceComponentFingerprint;
 
-    public static ServiceComponent createSingleton(ESPersistencyManager esm, SchemaRegistry registry) throws IOException {
+    public static ServiceComponent createSingleton(ESPersistencyManager esm, SchemaRegistry registry, long fingerprint) throws IOException {
         if (serviceComponent == null) {
-            serviceComponent = new ServiceComponent(esm, registry);
+            serviceComponent = new ServiceComponent(esm, registry, fingerprint);
         }
         return serviceComponent;
     }
 
-    public ServiceComponent(ESPersistencyManager esm, SchemaRegistry registry) throws IOException {
+    public ServiceComponent(ESPersistencyManager esm, SchemaRegistry registry, long fingerprint) throws IOException {
         this.esPersistencyManager = esm;
         this.schemaRegistry = registry;
-        this.serviceComponentSchema = new Schema.Parser().parse(new File("src/main/avro/businessModel-strategy.avsc"));
+        this.serviceComponentFingerprint = fingerprint;
+        this.serviceComponentSchema = this.schemaRegistry.getSchema(fingerprint);
         this.serviceComponentFingerprint = registry.registerSchema(serviceComponentSchema);
     }
 
@@ -51,5 +50,4 @@ public class ServiceComponent {
         // This is a compact and fast format, which has the Avor schema fingerprint sealed in
         return AvroMessageUtility.createSingleObjectEncodingAvroMessage(serviceComponentSchema, strategy);
     }
-
 }

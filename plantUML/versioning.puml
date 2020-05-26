@@ -1,0 +1,25 @@
+@startuml
+title "Tutorial Scenario"
+footer "Avro-ElasticSerach Tutorial"
+
+== Backend-Release 1 - Version 100 ==
+BackendComponent -> BackendComponent: worksWithSchema("100")
+ServiceRWComponent1 -> ServiceRWComponent1: worksWithSchema("100")
+ServiceROComponent2 -> ServiceROComponent2:  worksWithSchema("100")
+ServiceROComponent3 -> ServiceROComponent3:  worksWithSchema("100")
+
+ServiceRWComponent1 -> BackendComponent: readWriteMessages("100")
+ServiceROComponent2 -> BackendComponent: readMessages("100")
+ServiceROComponent3 -> BackendComponent: readMessages("100")
+
+== Backend-Release 2 - Version 101 ==
+BackendComponent -> BackendComponent: worksWithSchema("101")
+ServiceRWComponent1 -> ServiceRWComponent1: worksWithSchema("101")
+ServiceROComponent2 -> ServiceROComponent2:  worksWithSchema("100")
+ServiceROComponent3 -> ServiceROComponent3:  worksWithSchema("101")
+
+ServiceRWComponent1 -> BackendComponent: readWriteMessages("101")
+ServiceROComponent2 -[#blue]> BackendComponent: readMessages("100")
+ServiceROComponent3 -> BackendComponent: readMessages("101")
+
+@enduml

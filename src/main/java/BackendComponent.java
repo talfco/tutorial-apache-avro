@@ -21,7 +21,7 @@ public class BackendComponent {
     private ESPersistencyManager esPersistencyManager;
     private SchemaRegistry registry;
     private Schema backendComponentSchema;
-    private long backendComponentSchemaFingerprint;
+    public long backendComponentSchemaFingerprint;
 
     public static BackendComponent createSingleton(ESPersistencyManager esm, SchemaRegistry registry) throws IOException {
         if (backendComponent == null) {
@@ -87,7 +87,6 @@ public class BackendComponent {
     private  String convertAvroBinaryToJSON(byte[] msg)
             throws IOException {
         // We retrieve the fingerprint of the message
-
         long msgFingerprint = getAvroFingerprint(msg);
         // Now we retrieve the Schema via our registry
         Schema mgsSchema = registry.getSchema(msgFingerprint);
@@ -110,7 +109,9 @@ public class BackendComponent {
         JsonEncoder jsonEncoder = EncoderFactory.get().jsonEncoder(mgsSchema, outputStream, true);
         Object datum = null;
         while (!binaryDecoder.isEnd()) {
+            // Decoding the binary message
             datum = reader.read(datum, binaryDecoder);
+            // Encode it as JSON message
             writer.write(datum, jsonEncoder);
             jsonEncoder.flush();
         }
