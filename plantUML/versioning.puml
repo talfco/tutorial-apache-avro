@@ -1,5 +1,5 @@
 @startuml
-title "Tutorial Scenario"
+title "Component Lifecycle Scenario"
 footer "Avro-ElasticSerach Tutorial"
 
 == Backend-Release 1 - Version 100 ==
