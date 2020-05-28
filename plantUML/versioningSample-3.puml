@@ -14,8 +14,8 @@ cloud "SchemaRegistry" {
 package "BoundedContextComponent" {
 JSON_V100 - [ServiceComponent]
 [ReactMaintainUI] -> JSON_V100
-AvroMsg - [BackendComponent]
-[ServiceComponent] -> AvroMsg
+JSON_AvroMsg - [BackendComponent]
+[ServiceComponent] -> JSON_AvroMsg
 [BackendComponent] -> Avro_JSON_Store
 [BackendComponent] -up-> SchemaRegistry
 }
@@ -25,7 +25,7 @@ package "JSONConsumer1" {
 }
 
 package "AvroMsgConsumer1" {
-    [DataReadComponent1] -up-> AvroMsg
+    [DataReadComponent1] -up-> JSON_AvroMsg
 }
 
 @enduml

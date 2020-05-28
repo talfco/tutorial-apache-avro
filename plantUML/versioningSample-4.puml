@@ -20,8 +20,8 @@ JSON_V100 -up- [ServiceComponent]
 JSON_V101 - [ServiceComponent]
 [ReactMaintainUI] -> JSON_V101
 
-AvroMsg - [BackendComponent]
-[ServiceComponent] -> AvroMsg
+JSON_AvroMsg - [BackendComponent]
+[ServiceComponent] -> JSON_AvroMsg
 [BackendComponent] -> Avro_JSON_Store
 [BackendComponent] -up-> SchemaRegistry
 }
@@ -33,7 +33,7 @@ component ReactReadUI1 #LightGreen
 
 package "AvroMsgConsumer1" {
 component DataReadComponent1 #LightGreen
-[DataReadComponent1] -up-> AvroMsg
+[DataReadComponent1] -up-> JSON_AvroMsg
 }
 
 
