@@ -1,6 +1,6 @@
 @startuml
 title "Component Lifecycle Scenario"
-footer "Avro-ElasticSerach Tutorial"
+footer "Avro-ElasticSearch Tutorial - cloudburo.net"
 
 == Backend-Release 1 - Version 100 ==
 BackendComponent -> BackendComponent: worksWithSchema("100")

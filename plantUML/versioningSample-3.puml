@@ -1,0 +1,31 @@
+@startuml
+
+footer "Avro-ElasticSearch Tutorial - cloudburo.net"
+
+database "NoSQL ElasticSearch" {
+    folder /EsIndex1  {
+    [Avro_JSON_Store]
+    }
+}
+
+cloud "SchemaRegistry" {
+}
+
+package "BoundedContextComponent" {
+JSON_V100 - [ServiceComponent]
+[ReactMaintainUI] -> JSON_V100
+AvroMsg - [BackendComponent]
+[ServiceComponent] -> AvroMsg
+[BackendComponent] -> Avro_JSON_Store
+[BackendComponent] -up-> SchemaRegistry
+}
+
+package "JSONConsumer1" {
+    [ReactReadUI1] -up-> JSON_V100
+}
+
+package "AvroMsgConsumer1" {
+    [DataReadComponent1] -up-> AvroMsg
+}
+
+@enduml

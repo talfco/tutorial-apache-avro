@@ -1,6 +1,7 @@
 @startuml
 title "Tutorial Scenario"
-footer "Avro-ElasticSerach Tutorial"
+footer "Avro-ElasticSearch Tutorial - cloudburo.net"
+
 actor endUser
 autonumber
 endUser -> ReactUI: enterData

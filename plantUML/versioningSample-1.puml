@@ -1,0 +1,25 @@
+@startuml
+
+footer "Avro-ElasticSearch Tutorial - cloudburo.net"
+
+database "RelationalDB" {
+    [DBSchema_V100]
+}
+
+package "BoundedContextComponent" {
+JSON_V100 - [ServiceComponent]
+[ReactMaintainUI] -> JSON_V100
+WSDL_V100 - [BackendComponent]
+[ServiceComponent] -> WSDL_V100
+[BackendComponent] -> DBSchema_V100
+}
+
+package "JSONConsumer1" {
+    [ReactReadUI1] -up-> JSON_V100
+}
+
+package "WSDLConsumer1" {
+    [DataReadComponent] -up-> WSDL_V100
+}
+
+@enduml

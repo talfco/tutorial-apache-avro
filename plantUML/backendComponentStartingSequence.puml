@@ -6,7 +6,7 @@ participant ESSchemaRegistry order 40
 database ElasticSearchCluster order 100  #coral
 
 title "BackendComponent Starting Sequence"
-footer "Avro-ElasticSerach Tutorial"
+footer "Avro-ElasticSearch Tutorial - cloudburo.net"
 
 autonumber 1
 BackendComponent -> ESPersistencyManager: createSingleton(esLoginData)
