@@ -5,7 +5,7 @@
   "name": "BusinessModelStrategy",
   "fields": [
     { "name": "avro_fingerprint", "type": "long"},
-    { "name": "index_ipid", "type": "string"},
+    { "name": "index_ipid", "type": [ "null", { "type": "string" } ], "default": null},
     { "name": "last_update_timestamp", "type": "long", "logical-type":"time-micros"},
     { "name": "last_update_loginid", "type": "string"},
     { "name": "partner_ipid", "type": "string"},
