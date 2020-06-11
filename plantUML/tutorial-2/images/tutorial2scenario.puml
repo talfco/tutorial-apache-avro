@@ -1,0 +1,29 @@
+@startuml
+title "Tutorial 2 Scenario"
+footer "Avro-ElasticSearch Tutorial - cloudburo.net"
+
+actor endUser
+box "Presentation Layer" #LightBlue
+participant ReactUI
+participant ServiceComponent
+participant PresentationModel
+end box
+box "Domain Layer" #LightGreen
+participant BackendComponent
+participant DomainModel
+end box
+box "Data Layer" #LightYellow
+participant ElasticSearchComponent
+participant DataModel
+end box
+autonumber
+endUser -> ReactUI: enterData
+endUser -> ReactUI: clickOk
+ReactUI -> ServiceComponent: put /model/strategy(localizedJSONData)
+ServiceComponent -> PresentationModel: processModelLogic(localizedJSONData)
+PresentationModel --> ServiceComponent: avroBinaryObject
+ServiceComponent -> BackendComponent: put /persist(avroObjBinary)
+BackendComponent -> DomainModel: applyDomainRules(avroObjBinary)
+BackendComponent -> ElasticSearchComponent: put /businessmodel/strategy(avroJSON)
+ElasticSearchComponent -> DataModel: persist()
+@enduml
